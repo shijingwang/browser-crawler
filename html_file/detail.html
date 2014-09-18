@@ -1,0 +1,1073 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" class="dj_webkit dj_chrome dj_contentbox"><head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Reaxys  </title>
+    <noscript>
+        &lt;meta http-equiv="refresh" content="0;URL=withoutany.jsp"/&gt;
+    </noscript>
+    <script type="text/javascript">
+    if (!navigator.cookieEnabled) {
+        window.location.href = "/reaxys/secured/withoutany.jsp"
+    }
+</script><style type="text/css">
+        FONT {font:11px tahoma, sans-serif;}
+        FONT, .hierarchy div.concept span.hitOnly {color:#0000FF;}
+        .mainTabs .mainTabIcon, .tinyTab, .ribbon .ribbonBorder {behavior:url("../styles/Oceanblue/pie/PIE.htc");}
+    </style>
+    <link href="../styles/Oceanblue/styles.css?ver=0.2.18608.1" rel="stylesheet" type="text/css">
+    <link href="../styles/Oceanblue/search.css?ver=0.2.18608.1" rel="stylesheet" type="text/css">
+    
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" language="JavaScript">
+    var constants = {
+        ctx: -1,
+        url: {
+            substance_details: '/reaxys/secured/substance_detail.do',
+            paging: '/reaxys/secured/paging.do',
+            planer: '/reaxys/secured/planerjs.do',
+            avail: '/reaxys/secured/availabilityservice.do',
+            cit_href: '/reaxys/secured/abstract.do?performed=true&ajax=true&jsessionid=1B9E5FA4072AF7A68B502648535897FF&citId=',
+            autoplaner_href: '/reaxys/secured/planerjs.do?performed=true&jsessionid=1B9E5FA4072AF7A68B502648535897FF&action=autoPlaner',
+            autoplaner_progress_href: '/reaxys/secured/planerjs.do?performed=true&jsessionid=1B9E5FA4072AF7A68B502648535897FF&action=autoPlanerProgress',
+            autoplaner_process_data_href: '/reaxys/secured/planerjs.do?performed=true&jsessionid=1B9E5FA4072AF7A68B502648535897FF&action=autoPlanerProcessData',
+            autoplaner_cancel_href: '/reaxys/secured/planerjs.do?performed=true&jsessionid=1B9E5FA4072AF7A68B502648535897FF&action=autoPlanerCancel',
+            sessiontest:  '/reaxys/sessiontest.jsp',
+            nosess:       '/reaxys/nosess.jsp',
+            history: '/reaxys/secured/history.do',
+            filter_href: '/reaxys/secured/filter.do',
+            bubble_href: '/reaxys/secured/bubble.do',
+            scopus: '/reaxys/secured/scopus.do',
+            registr: '/reaxys/secured/registr.do',
+            autoplansearch: '/reaxys/secured/autoplan.do',
+            alerts: '/reaxys/secured/alerts.do',
+            search: '/reaxys/secured/search.do'
+        },
+        action: {
+            A_FORPOPUP: 'forpopup',
+            A_REACTION_PLANER_ADD: 'rp_add',
+            MS_APPLICATION_SAVE: 'ms_application_save',
+            A_CHANGEPAGESIZE: 'change_psize',
+            A_REACTION_PLANER_GENERATE: 'generatePlaner',
+            A_REACTION_PLANER_ADD_RGROUP_NODE: 'rp_add_rgroup_node'
+        },
+        other: {
+            FILTER_REQUEST_TIMEOUT: 1800000,
+            SEARCH_PROGRESS_REQUEST_TIMEOUT: 200000,
+            SEARCH_PROGRESS_REQUEST_DELAY: 2000,
+            getFilter: 'RX.MYD,true,false,CIT.PY,true,false,IDE.MW,true,true,RXD.STP,true,true,CIT.AU,true,true,CIT.PA,true,true,CALC.LOGP,true,false,CALC.HDONOR,true,false,CALC.HACCOR,true,false,CALC.TPSA,true,false,CLPHASE.VALUE,true,false',
+            jsessionid: '1B9E5FA4072AF7A68B502648535897FF',
+            STRUCTURELENGTH : 50,
+            databaseList: [0, 1, 5],
+            quickSearchVisibility: true
+        },
+        err: {
+            err_no_hits_for_autosearch : "Reaxys could not find any hits in the database. Note: the query has been expanded automatically and a substructure search based on the original query also didn't find any hits.",
+            err_no_hits_for_reactions : "Reaxys didn't find a result that matched your query. Please consider a reformulation with less constraints and search again. No results for reactions",
+            err_no_hits : "Reaxys didn\'t find a result that matched your query. Please consider a reformulation with less constraints and search again.",
+            err_session_expired : "Your Reaxys session has reached a timeout and has been shut down automatically. Please note: all unsaved results of the closed session have been lost. ",
+            err_no_related_substances: 'No related substances available',
+            err_no_markush_hits: 'No related compounds are available',
+            err_filter_no_hits_lim: 'This filter operation would lead to an empty result set and is therefore discarded. Please try to broaden your filter.',
+            err_filter_no_hits_exc: 'This filter operation would lead to an empty result set and is therefore discarded. Please try to broaden your filter.'
+
+        },
+        userpreferences: {
+            multiservers: true
+        },
+        results: {
+            rootContext: "substances"
+        },
+        request: {
+            databaseJSON: '{"templateId":{"0":0,"1":1,"5":1},"showOutput":{"0":true,"1":true,"5":true},"databaseIdByLinkName":{"EMOLECULES":5,"PUBCHEM":1,"REAXYS":0},"reaxysDatabaseId":0,"databaseTooltipContent":{"0":"","1":"","5":""},"description":{"0":"Reaxys","1":"PubChem","5":"eMolecules"},"label":{"0":"Reaxys-RN","1":"PubChem-ID","5":"eMolecules ID"},"isSupportedAutoPlan":{"0":true,"1":true,"5":true},"linkName":{"EMOLECULES":"eMolecules","PUBCHEM":"PubChem","REAXYS":"Reaxys"},"databaseInformationURL":{"0":"\/documentation\/rx.html","1":"\/documentation\/pu.html","5":"\/documentation\/em.html"}}'
+        }
+    };
+</script>
+<script type="text/javascript" language="JavaScript" src="../js/sre_5_2_1_01/molfile.js?ver=0.2.18608.1"></script>
+    <script type="text/javascript" language="JavaScript" src="../js/sre_5_2_1_01/main.js?ver=0.2.18608.1"></script>
+    <link rel="shortcut icon" href="/reaxys/images/favicon.ico">
+<script type="text/javascript" language="JavaScript">
+    var settings = {
+        version: "?ver=0.2.18608.1",
+        theme: "Oceanblue",
+        timestamp : "2014-09-18 05-55-56,551",
+        cookiemaxage : "15768000",
+        webHelpUrl: "http://help.elsevier.com/app/reaxys_select/p/9273",
+        sim_dlg_path : "/reaxys/js/simDlg.html",
+        loading_img_path : "/reaxys/images/Oceanblue/loading.gif",
+        dots_img_path: "/reaxys/images/Oceanblue/dots.gif"
+    };
+    
+    var autoPlanOptions = {
+        maxBranch : "5",
+        noOfPlans : "10",
+        defaultYield : "50",
+        maxDepth : "5",
+        stopWhenCommAvail : "true"
+    };
+    
+    var fromSource = {
+        fromPlaner: 1,
+        fromResults: 0,
+        fromClipboard: 2,
+        fromSynthesisTree: 3,
+        fromQuery: 4,
+        fromScopusResults: 5,
+        fromHistory: 6,
+        fromResultsPubchem: 255,
+        fromPubChemToReaxys: 100,
+        fromRoche: 101,
+        fromAlert: 102
+    };
+    var sim_wdt;
+    settings.loading_img_path = (settings.loading_img_path.indexOf("jsessionid") >= 0)
+            ? settings.loading_img_path.substring(0, settings.loading_img_path.indexOf("jsessionid")) : settings.loading_img_path;
+    //Adobe SiteCatalyst
+    var $elsdata = new Object();
+</script>
+<script type="text/javascript" language="JavaScript">
+    var ReaxysCaptcha = {
+        userCode: 0,
+        errorUrl: "/reaxys/error.jsp",
+        errorKey: "Reaxys overloaded",
+        captchaJsSource: "js/recaptcha.js"
+    };
+    var RecaptchaState = {    challenge : '03AHJ_Vuv3auyPkAJS8Ovl1wAhOJdIzvc8AaU_RpFIF9r9MEwqkeJdO7tTx1mfyc5w9bDKIyhCmchBHbhxLU0xaeHcIP_gbadJjkpdW8B96VGUjnnMGyvYYsLuhULnurK5YejsVchULAGbn7FQ-v5idbz2KZjF6P2SPatwMWm48wwAsFQzvs7ji-Sy1Y7QAF0iGUHuaCKhaybnuhXtW_iTFygMX5B9I1NVsQ2-lDQhJP6XFGXzNrwAPJE',    timeout : 1800,    lang : 'en-US',    server : 'https://www-google-com.ezproxy.proxy.library.oregonstate.edu/recaptcha/api/',    site : '6LeoRc0SAAAAAEQVf2xWgBYnzwc541iO6OqL7JkI',    error_message : '',    programming_error : '',    is_incorrect : false,    rtl : false,    t1 : 'Ly93d3cuZ29vZ2xlLmNvbS9qcy90aC9faWlZRXpWaG1lVGtfam93MEJ6a084Q1NpMWNFOEdFblgydlN2TFdjcDVjLmpz',    t2 : '',    t3 : 'a0tzZUZQMjBrWXM2MzZEcDVDUVZQOE1lUG0yaGhqdHpWdGdzdlpUSy9pWUdaTVJEeW95N2lBcnpTTFZ6VnpXWHFzSjlBNEdSeUhPR1IrYmt4eklPRDlhKzJGU08za3hvVDRSUVgwYkJ2aDBxTU1oMjgrVFJQa1VtWnNaNXdHRlQrbkp1QkgvRDNSUnFCZEd2STZmRG55RWcwRndKQ1NpOS8xUE53U21PZXh0Tm1LQnIrWG9QamVTdGFaK0h6aVkzTGgyTTM1OTdWcldYQXI4WmdQUXJzb0tEcVJqZHZpWEVucUJSY0RiQkJ2NGhMRGd5SVVabzVKcW5xUkFjS3ZLbTFjYUhUWUYvR3h1aHUwaW9lVXFMZWdiZDNEOWlsOHZYSFkxTjQ4M2VRM3RsbUpIQXArdDdOUUl5WWNUYnJkUHE0UWdHS3hDRllMN29IQkxMdm5sQ3NNb0dIa0lwR1hkcGFHb2pHZlVqTUUxTTZSZjFwZUpJRkg5QkFpK0t4OGhWODloZzFKYTkxUGVsTzlBN0xaayt4QW5qMGhwMHBaSW90TW9lLzIvSEdOeXRDMHVWUC9pbkhIYkwwNm80N1hyMGRRN0R2ejllZUhVR1FDbHcvR1gyWHI5b3c3eGJUL1o0aFFFZ3hTM2IrUVpNOHYzdnVZSUJFRkw1WFY4K0N6RWd0VnBlUWErd2FOa21JYXBxRHJHUVBvcUUyUHZyS1lzaEE1VElUSmhUa094RXBrL1Y3b3JKckRQREdlZHdWc3YrbnQ5VXFJcGtRZGZZcXB4QzA0bmROalBYQWdCcWdhckh3QmdZQk5LTXFEdVFrcGxlZ25YUWtWSmhjakZzOWo5TmxoMmFzMnNzSTFNZyswUUZXbUlFTXQzYitpUUJlVUlhNXNUczJnVTBza3ZCa0JIc2Y0RXhQYlJ6b3hKRGd6UHBhb3dBSzYxcEVkOENISUhWUEJ1YUxidmE4U0pCQWRaSVRDVjNTZDRmTjAzeDNCUEJTdmprU3F5QU5YZXlNdzNRcWx3eHh2UHQ4N1NSZGxrYk03eTkwc0tYZEJtYS90UXV3VXM2enJhRXBpanQzTDErL293TXMzUFIyZy95clRjL1h6V0ZwZmpXR1V0bFRmOEpsVllFaWlJMDFsNThHY3Q5b1R1QnRCNjBxT2xyTlVubUcyeWcrbk9jaVlibU41RTJyNWN3MnQ2RVVMZU5iYkM4Q2tvaVRkV0QyMmFzejVSZ3ZFTllRYms4YTZRbGVJUjFPSWgvOVNJUjd4OUQvSjBlYkVXNzRTNTU3cUk1dDU5K3d3djBzWTRSVGtGdkZKczAxWnRpN1lvakxab0dsZ1BtSlZzWmN3Vk53ZkdXc2Nld3g0dHpwbGcrZitCL0U1K3ZIdWl1SjJEZEZibEtwVEFBMDJNS1R0Q1ZhM29Hd3V5NjFuS0pocW5Ib1JoeE44ZmhsSHZvcmhnWFp5U05keWlwVlQrZnBadGFhdVZSMHVuU1pQVlg1M0F2ZWxvWGo3L3lZOC85RE1mY2lEaUlmRUFteEU3RSsyam05aWVVeFFITU9GN1N0dm9JeXJyZXVpbFNBTG5NL294UnZaRVBzdlRSN3ZLaXBxZ2lQK01JdTltM3NSMmRCbUtqdWU2QVBudmdlRFNFNFhCWkxaUng2ZDN5emkxWkttVlFuUzVwZ1RSTWlTRkNHU2RXd2xZVWRpRzk2QTVaanhxTnlnMzNZTlBWUVlxMys0ZHRZNFMxRVpNcUgyL2RPL3ExVlk0ZXJjMWQrd2g0bjVYVU15OWF3N3Bwa3lpTlU1TDRkazRWNkk5MDZKQUFmV2FXWjBsR0g4NEszUnJlc1NweTBnRWtVajA3UzhBZ1JZdEU4NkZ1WDI0ZmQ2N2FNRXY0WHp1cGEzYW9Zcy9kOUJpVlo2ZXpBdWZjWWlXc29Yd3VkaERLN3poZlpQNG0rRE5nUE4wTk1ZQ3ZMcGdPc2l6b3lacC9WRFFTNDJFYjhMbnFuaTM3SnJsME5ROE5lOXNScVZDdlZLS3Vqc1dGdmh0MUJSWitVUEFoZno0QTVXK1VjUUxzUk5wbTFOaFBITEt2SytoU2Y0UkFtcEtYT2pqZmdNOW5uc292Q1ByK3A0SUM0dVZzcUpibm9PQWpoTEx0dGtJSDBaRmlxSWcra1pNcXhXSVExanJiKzZKSnFESFg2bldIRlA0V3FYVXhxcVN3Wko1M1RYam9FMjZpWWM0K3JDZmFOTkJ3VEpsNVZkbzdqcTVyUmtsdFJhM2sxbFA0b0pVdkJIVEJWRXI3bXd2RVhtdU12aVJ6V05MM09ZWU14ek9vZXk0aDB6UGVHKzQ3MGlhYzFUV3I1cFJGN1RzR0NGNkVKYWhiVHc3YXVEMXh0YXdHaHVBYUovZGFXYXdRZEk0aGcvNjZCQXNzUGhtZkpKcEQ5QVBabzZTbThoVENlb0RKbTJWU3NjSlFPclZZSGJ5NG1VVkt0S1g0SENjSkNSVmx1OGFZU1hGRUxuM1NzakxLcjBuUzZjWllsU0RNaUtGSHRZNERBWHVyM0ZBVitoVjFFcm5taW0yTnZhc3JwNnBtTE01R0pzVGVVSWU3aDIzS1QzcVFWd2tXQTl0b3FpbjNkbmJLem9JVkt4b2ZkQU5nZlFjZHhqcThaemJvNVdmWnpLMjNBeDNySkJmbVkzVEdGekpNUzB5WHdvanBORGV3WHZneGZaaFh2MzhLRWNyWHBwTFdpR2VTNE1uK25yM3h2REFTRDJjMEtiWjZncGdXVXNISlhPaUlBUVVCazJQbmJleFIxVUZQRlZNWUxhMk82b0JPZjdWWTJKOFVsWUVjTmc0SGRFK1FCT2hmbURXeW0vRGxiZ2p2aktFOE81U2ZmOEs5VUdocmVySXlIckd4Uk1wSlNzOWtoOWFsM3hmZ1RXUUtGczErdmd6N1BMZHcrbVBsRjdzL0R0QkVFbTd0Z29JYmtZaGJndTNBNUNQdHNFZWtxS0I3UUY3SjZ6NHRYbEo0b3FPeUJ3aklHUVk5K2Iybkp4M2pGTlorSk9ndVVPeTFQYnc0S1NuZ2p2N3VUcHRESFY2RTNCRmV2Z0tHSCtDdVUzMG1ZZGxGcHQ5YzB0ZndsbExIYUpmRytyZ1ZCT0x3dW1Gbk45NXN6T2o3cVZ1M0xpUTdwWGxGdHg3SkU5c1ZnK29rVitudlJta2NHWHk3dTgwVDNiQ0RGMW9laUxaZkxicWNQakFEbFMvZ3JSblBRSXY3UCt5T3V6Q0drM1QzRU5wejlQYVMrUTNJNzF0b0gyR3hzaW90dktNOHhWS0hFNlVjeDFLaW9iVmJpT2l3bTBrRXdEZ1FORmVnMDFMY0Z4Wnd0RURMekJNbDgvbG5aTVZQRXluUTUxd3NqTkxTR2luSU0rSGFONkEzTHptRVdIcVN2T2lKcGhTajM5c1lacGc1Q1JnTzdCT1hLYXl3QzU3WG5jQVpYRjZDc2xXZTdtLzBqN3VnMHNPWHVHVExSd3VldE5zVkJnOUMyS2dhd0E3OTdzUjNsQnI0RVp2a2RqaFZtS3drMkUxcEJXYWNvSlloajJLd0hrNk5TQ1IwVUZkRDdjS1d3R1BzWUVCUmtYK3hDMzBCeXFoS2VlYnJUT2lCWGg0b0lnY0hWMENYSE5VSTg0cW5VaFBaU0VGR3FLTUN1QTlyd0FFN3FUSUErL0RGTjh3bDFBbUlCaVVaL3Yyc3Vsc0tGd2hOZHBZMFNuekg5V1JNWjU2SVV5eDBPMEdyNzJzdDBDUFMzSUR0RHBYa0hUTk5iMFltdXlDbndNQ2FBeGVPMVowb0szRkhSQnl1TkdaR21oNVl4bHVWRTI1aTNFWi9nd3lPWE1YeGlEdnRUT0JobTVzRmdBNW9EN0hJTHBJMEFFVkZuWHVHc05LTkZ4RUZMQ0ZpRklleVZrU21RYUhrdnp4dHo5TVNEL2RkMTcrZWNMYS9BZ1hBN2c2bjgrTmcvWVVlcCtESFI0eEVEN1NYWVJ6aHZLRUpXUVRLY2pxdERUMDBETmMxdlFBTExzSUExV2NKUE1Da1EzVGNwZTdNcndQa1VBb2JlSjZWUEp3a2c5TXlDRlhkRHNLNWFJY2lzb1NGZ25TMnhFbWFldU9TcGtrZGR0RW5rZXh2WU1XZW1PUUhTdS84MEdZUlRFa1JyMWNlamtzVmw2a0tzWStWckpyZ3lSOTI0U0o0Y2FGYkdvLzNKWjdKNzVsbkx2bVExOTlPbUFzVmliZ0l0cjYwTmJKb2N3R3dCdVVYbTdaL2FjYTBMaGRvNmNlYk5rRGt4TW9VOTZCN3EwRlJQaUsxZkppMFZkWSszU256V3d6NlpwdThwM2FwT1RmOUY3Qkp1TkJFeU1neW5BYXd2enp2aEl0MlpVTk9yRmxaZXQvQVFqZXczamdpbjJCZWxhTThJcWg4SDlWZXczc0VvTy9FSjg4OTFsS3cvMDJ2MkVrRERPUEdvbVlwajB2cmFETHllcjBndFdTa1dmRzRQWGVtdVJrTUF2ais0WHRTSTFFRkFHWEsyaFdXWFV3cG00aFREVzhlY1RTc3hwOU02N21IL0lod21RSG1GWVJFNE9oMUEvYU9UMFdURjFQMFQ5ZmRoSWRFY1czaC9GclVYYzRDNDAvYWN1Z0lqUGJNWmsxTXFkc2k0c2hZN3B0Mll1ek5IWHl3WGIzU1dydXJqeGYzWGdaeUxaYjlXd0dyUlpqd1U2dXZHQ2FiancrSXZpdG9RSVRRWVpIVEl6djdVb3FHYlRkS2xxMG1FdzFLdllBeDJTVXlxaU9GOHBvZVp3ZkVhVW5kQ09HaWZUdXRWSkN3cmJpT241dktUdVRVWCtuU1JNcmtMRFc0YXhuOEdKOElpWmFnNkNsNm9NL2x4K2pXQzRvY3RvbHNxai9RUmt4UUQ0VXpiMmY0bWh4aSs4R3F0U2VmMjUwQ1NpRkY5VGovaHRCMG5zOEIwSkhzT3ROVzR3WXZMMUVxWkFuYmd3ZHlaZjJFNDVRaTRvZ0tCOUJlWExlTkhxRTVCY3docmZJSzNRTmZvZXU0WnZnblVGVGxuR0ZZaFIrYWtScmJZTWExN3lKcTlmU2lYTTR6NG5nREJwUHovaVlxR1VZb1loY0ZzbUZJZ2lJUmVpRG00dzZiQ0cydW05VGFJSlpqSTVyZjRXL09aalM0d3VlNlNsUjhjbTJtUGk3VUllN3dNRnh1OXhSS2NsbmM3UndxdHdDNkRRUmR4UU8rdUgrbFB6QTRHS3JIOGEvSHZzMVZpT1h4djhlL1B3ck5ra3c4N2pGSXY3cTIwdzVScGs0UDBDZloyelA3ZzZWWm9PeldoRFRvWTBBMEdMVlI1anpqYnErQ0h5THdtbSszSWNmNE9RV2FSZExGRWdVa1F1Ym9saEJHMTFnRWtrL01oVTdHdHduYkQ1cDRMQnBIc3l2Q1p4RC8xQnAvN3oyRGhEeGRCZ2ZRSFh2b3ZvK0dXMUNxaWV1SzJ5cjdDWGJ0VTRuNENxM1laUDIxRTBKV3ZhbExxbkNLK0RtRGlFY2VRQUhsVlVPMVlPMkoxVUlwaHNyUmVBa0NuNWRGWkprU2xpQUNIVU9TS1dqNE5vWlE1a082SmU0QUVxNlpML3VLdzZJM2JnZ0MzeVZlMXVxTEVNZkI3dVFwRDVRc1VSNmdzTFdNK2syem4ya2k4N1A5TVJmN2tvMGd5YW0zY3c2QkF4ODVxbXYxZ0V1dXpKZmJNTTdJQlZnVXJhQW9rUW53bWlTT2ZEK1RpUHFiOVo5citTWk1RQlJxYWVZUG5jNml6RjkrWGJ3dk9jeEFOc25vZnJNN1hjZXVZa2s3bzAyUEZ0SmdtOFdjQnBZVTFVVE5MQllqdmdjMElaelJUdFZKWWxYR1JQUTJXN1NTS2M4YXgrbnFtVi9mTmovcUJEUUlUVGxka0JZbUROTUpkcjFkV1NrQzlFN00rOTFQWTFzZ05PK3lBNlNzbEZwQXFXSldSdmIwdlpOZ2N6TDFnckVBVzNKakRZWkdqd1JNTTFmb0lXZ1FwS3gzYkp0MWZaMFJVMFJHZGplaEgvdFFvdWJsWkJGbVVtQVJERVUvYzZYbHgyL3F6M2F6QXNKNGswVVExeWJMakRHNHl2UHlxdGw0dG5aamtwS3dLMXFVenFPNlZmSXZ2OVk4YmVJRTgwZnphRDlZWWFzVFdGZUsrZEdaV1FhM21LQmxMV0FodFhMWHNRWmpFNEZzYWk0TmNjZDU1WjZFbGMwWlFZVnNrRUt1OWlvRWRlMnF0aVFZVTZvY2RtQmdHTjY0bytwVTV5bjQ1VU1PSHFrbHJsb2k0ZEFiL1ZFL1gvMkNDYm9VVkQvaTJFU3RNM0dmdVh5SFo0UmRLSzMrVytzMVFSUG5PNmRwU2VSclRYQ3A5RmpmWUlsVk5IOUJ0QTFBaWJISkNQaGtQRDVaTjl0ODhIMlJoeXdaUC9HcWJLaXRwczhPTXZHVWljLzRMZlArQVRNMEw0allSSEJNSlEyamJJWXJiaEMzQUlrZTlmYUZMWEZZbWVtWExBM0pqalcyQXBZNGJ4TjYxUUFld2Y5THFubndIa1Rtc01KRTNKa3B6RW1NVkxYWmw0N2UrdTZmblBLWHVmSFNhdG9FN2QwRnJNb2ZwOU5KZ3M0eHRjMGhtZkFuemhMSWRrUHo4OStJcm5mTDUrZ2NMZCtoUDFQZWh6QWt5VXZ3NFhDSEFwa1VNOUlVSCtxU1VqMjBQR2tiTlNUVlY1NVFheWI2UU1kM3l5eTg0djlSTVZ2UUxrNTBXOUoveVdFaHpvS0hsUkdtYU5hVzlLWGVnU1h6ejhNUGlIVlVXZVJPRngzQnlhcDI3T3pSRnlsQ3RJbmZaNEdJdUxJOFZKT3pMcHZvZWY3STZTRGpUVE1MemJPd0Z3RnFzTTZlNVFMV25HbVkrMHh1eldzVVN0dVVPcGpVUHA2RTFZZlhXY2Z4SlFNdEVNK2tnejRtbks5UmNCOHdkZUR2ZlJqZitxNWZsclc1SVpnbXNLRXFVVVRCV1lFdWRld0o1R2F0M0JZdjRrVGJsNk5jSjg1NFk1aU5Mb2s5bGxYMDVGeHVMeVdBV1M5MXB2eEtmL2c1bm53OUt5WmtvKzFGQmV2M0pTNDF1MlcwTEhzSitCVDl2azdXOHdwUlFkSzFCay9rS0dtNHF3QW5idm5DZjYzVHRJTjhFOUF2VWRBaWo0NzMzMEswWXRBOEVGVVBIbW5rM2Fnd3pNcVpFTzh2d2lldHpIQ3VsOEZwREFORzEyejE4bkN5QjM5Vlh6NU5xRUFpalVCYVphTVZsOXZFMnBicEJibFhlczVpZnRLS3FUNU1yc01OUEROSEhrZmVFbkxwN1dMdGdENE9nbS81bG0rNXhhYWcycXMyMUxoQkJJbXVOajdrRzBzV1pya1hKZUFjRVhkSlBlM0paRm5VcmRma3FXZmlNNkNoeWg0RVJxMWR1YnA1emtEMlUyVThTbm1kb3hXc3dPZGV1MWwvVFA5K0VtRDh3Z2xwUnptdkdzTlRKbHhmNW83MWVDZmh3L3B3ckduZk1IMGMxS0VBR0tjMFNqeFphRmU4ZnNGaG9mR0RaSnJQV0pvNExtV0VJZ2JrblFUeVlpV2VjN0cyTmlQM09VeUpXNk9OUSt2NkR5ekZSZnFUVHArRmwvaUpsZndGemVmS0VYbm1nVmxOS0NBM3hNcmc4bFplZFBkT1ZkNTJaL0Rxc2szNStnVmtmVDgyRjl1bUJoTlB0bWF1V2hQTEVsWDZSR2lnMGhxcnovY2RPQlU3YnlPSkVJWXJ1UlFzS3BXY3FJNzZjZHMxTk55dUlpbDRGTWFqaTAwQ1cvZTNrc05ZZVpUcDliaGhrYTAxTDlLM2svQUJGUXZNaUxjNGRWdjdadWdoT3ZaRWwzMCtWVm1QQlhRcm4vZXVxOFdPTmFYeDJvZzd2TTgrOGNOdjhMbklid1YyRFlGemRTaG4vQU9HNkVVeVc5Q1oxQ1ZVTEFRNFZjZE8rVEhyNDUvMnV1dnkrRHlrcjN5ZjR1RXB6Y2VsUWh5cDhVRXNxNUpFTllGOUZ4WnZzNWxubU1EMWlyL1RmZ0x3K2FvWUJMa1RSSk1aZEc5VGVQbDZMSTlrdlZVa0daOFQ4UisxNndXUTRQL1J3c1h2YVBzcUE2cjVDWWNXRWdOcU1oczB6WmllZ0lHeEpTUDNGNEx2bUhIL2pLQ2tVMklXWkE5a0JMaXB6c3lBVjRTSDFjNHhGS1RuMXB2Skovc0MwblEraHhPbEhKTnI\075'}
+
+    var RecaptchaOptions = {
+        custom_translations: {
+            refresh_btn: "Refresh",
+            instructions_visual: "Please, enter the words above"
+        },
+        lang: "en",
+        theme: "custom",
+        custom_theme_widget: 'recaptcha_widget'
+    };
+    RecaptchaState.lang = RecaptchaOptions.lang;
+</script>
+<script type="text/javascript">
+    
+    var dojoConfig = {
+        async: false,
+        locale: "en-us",
+        parseOnLoad: false,
+        cacheBust: "ver=0.2.18608.1",
+        packages: [
+            {
+                name: "dojo",
+                location: "./dojo"
+            },
+            {
+                name: "dijit",
+                location: "./dijit"
+            },
+            {
+                name: "dojox",
+                location: "./dojox"
+            },
+            {
+                name: "oceanblue",
+                location: "../namespaces/oceanblue"
+            },
+            {
+                name: "ui-controls",
+                location: "../includes"
+            },
+            {
+                name: "reaxys",
+                location: "../compressed/reaxys"
+            }
+        ]
+    };
+</script>
+<script type="text/javascript" src="/reaxys/js/new_dojo/dojo.js?ver=0.2.18608.1" djconfig="isDebug: false, parseWidgets: false ,parseOnLoad: false"></script>
+<script type="text/javascript">
+    require(["new_dojo/ob"], function() {
+        dojo.require("dojo.data.ItemFileReadStore");
+        dojo.require("dijit.Dialog");
+        dojo.require("dijit.TooltipDialog");
+        dojo.require("dijit.Menu");
+        dojo.require("dijit.MenuItem");
+        dojo.require("dijit.form.Button");
+        dojo.require("dijit.form.ComboBox");
+        dojo.require("dijit.form.Textarea");
+        dojo.require("dijit.form.CheckBox");
+        dojo.require("dijit.TitlePane");
+        dojo.require("dijit.form.DropDownButton");
+        dojo.require("dijit.layout.TabContainer");
+        dojo.require("dijit.ProgressBar");
+        dojo.require("dojox.fx.scroll");
+        dojo.require("dojox.fx.easing");
+        dojo.require("dojox.layout.ContentPane");
+        dojo.require("dojox.data.QueryReadStore");
+    });
+</script>
+<link href="/reaxys/js/new_dojo/dojo/resources/dojo.css?ver=0.2.18608.1" rel="stylesheet" type="text/css">
+<link href="/reaxys/js/new_dojo/dijit/themes/oceanblue/oceanblue.css?ver=0.2.18608.1" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/reaxys/js/compressed/search.min.js?ver=0.2.18608.1"></script>
+<script type="text/javascript">
+    require(["compressed/layers/QueryPage"], function() {
+    });
+</script>
+<script type="text/javascript">
+        require(["dojo/ready", "reaxys/modules/QueryPage/ModuleLoader"], function(ready, QueryPageLoader) {
+            ready(function() {
+                QueryPageLoader.run({
+                    errReactionQuery: "Your query contains reaction search attributes, which are not supported in your current product and will be ignored. Please contact our customer care service for more information.",
+                    xhrProgressDelay: 2000,
+                    errNoHitsFound: "Reaxys didn\'t find a result that matched your query. Please consider a reformulation with less constraints and search again.",
+                    errNoHitsAutoSearch: "Reaxys could not find any hits in the database. Note: the query has been expanded automatically and a substructure search based on the original query also didn't find any hits.",
+                    xhrTimeoutOnSearch: 200000
+                });
+            });
+        });
+    </script>
+<script src="https://server.lon.liveperson.net/hc/41683706/?cmd=mTagRepstate&amp;site=41683706&amp;buttonID=12&amp;divID=lpButDivID-1315928979&amp;bt=3&amp;c=1" type="text/javascript" defer="" charset="UTF-8"></script><script type="text/javascript" charset="UTF-8" src="//www.google.com/js/th/_iiYEzVhmeTk_jow0BzkO8CSi1cE8GEnX2vSvLWcp5c.js"></script><style type="text/css">
+
+.recaptcha_is_showing_audio .recaptcha_only_if_image,.recaptcha_isnot_showing_audio .recaptcha_only_if_audio,.recaptcha_had_incorrect_sol .recaptcha_only_if_no_incorrect_sol,.recaptcha_nothad_incorrect_sol .recaptcha_only_if_incorrect_sol{display:none !important}</style><script type="text/javascript" src="https://www-google-com.ezproxy.proxy.library.oregonstate.edu/recaptcha/api/reload?c=03AHJ_Vuv3auyPkAJS8Ovl1wAhOJdIzvc8AaU_RpFIF9r9MEwqkeJdO7tTx1mfyc5w9bDKIyhCmchBHbhxLU0xaeHcIP_gbadJjkpdW8B96VGUjnnMGyvYYsLuhULnurK5YejsVchULAGbn7FQ-v5idbz2KZjF6P2SPatwMWm48wwAsFQzvs7ji-Sy1Y7QAF0iGUHuaCKhaybnuhXtW_iTFygMX5B9I1NVsQ2-lDQhJP6XFGXzNrwAPJE&amp;k=6LeoRc0SAAAAAEQVf2xWgBYnzwc541iO6OqL7JkI&amp;reason=i&amp;type=image&amp;lang=en&amp;th=,8bCczDnkHij3eLb65jU07_uSrfAAAAAmoAAAAAfYALyUqwQJIQ-3Qb5Wdj5KmPgnYMm7774JPWsXiUUJ0zgwFEEumiUy21ewRrOayqXqSfBLSmnco-Px56jfvqAR8HmOR01qKNrwIogQnd0kc209E_40KUc1UIMVB3j_ReeVYYmQPFSlj_OoE8CiCntBmZw-lEUMAJdiv6kKcCULyKPGdfD6evmBnATOvJXx-LkHSC0rTk_07D5_o2pfR75IH2ToOEl0XS5GJIf893c8rZw-jRiqRLAWz3hRZNJabg"></script></head>
+<body class="oceanblue">
+<div id="aaa">
+    <div id="lpButDivID-1315928979" style="display:none"><span><a id="lpChatBtnHref5712807804" class="lpChatTextLink" href="https://server.lon.liveperson.net/hc/41683706/?cmd=file&amp;file=visitorWantsToChat&amp;site=41683706&amp;byhref=1&amp;SV!Button=1" target="chat41683706" title="Our live chat service is currently offline.  Please try again during business hours or click here to leave us a message.">
+   <span id="lpTextLinkSpan5712807804" class="lpChatTextLinkText"><span style="font-size: small;"><span style="font-family: verdana,geneva;">Click here to leave a message</span></span></span></a></span></div><table width="100%" border="0" cellspacing="0" cellpadding="0" class="navTableMinWidth">
+        <tbody>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    var isRemembered = false;
+    var err_clipboardInterruptedOperation = 'This operation was interrupted due to encountered errors.';
+    var item = 'Search';
+    var err_page = "../error.jsp?errorMessage=";
+    var nosess = "../nosess.jsp";
+    var clipboard = '/reaxys/secured/clipboard.do';
+    var customset = "/reaxys/secured/customset.do";
+
+    var ismainbase = true;
+    var appSession = false;
+    var currentPageURL = encodeURIComponent(window.location.href);
+
+    var enableClipboard = 'true';
+
+    var menus = new Array();
+
+    var valSimilarity = "95";
+    var valSimilarities = "80,60,40,20";
+
+    var GET_SIMILAR_COMPOUND = 'getsimilarcompound';
+    var GET_SIMILAR_COMPOUND_SELECT = 'getsimilarcompoundselect';
+    var A_OPEN_CHAT = 'openchat';
+
+    var clipboard_max_copied_rxd = 10;
+
+    var breadSrc = "../session_data/1B9E5FA4072AF7A68B502648535897FF/breadcrumbs/similarity.png?rand=";
+    var similarityImagesPath = "../session_data/1B9E5FA4072AF7A68B502648535897FF/breadcrumbs/similarity/";
+
+    var similarityTooltips = {
+        "LblHelpSim1": 'Position/Stereo Isomers: isomeric structures with different arrangements of the given structural elements ',
+        "LblHelpSim2": 'Near: includes structures containing the same ring and chain systems (possibly multiple) with the original relative positions of substituents and extended by further simple substituents such as hydrocarbons ',
+        "LblHelpSim3": 'Medium: includes structures with a wider range of rings and substituents: the degree of unsaturation, form and substitution patterns of rings is extended ',
+        "LblHelpSim4": 'Wide: includes a still wider range of substituents, but retaining to some extent the influence of the relative positions of substituents ',
+        "LblHelpSim5": 'Widest: as for Wide but without any restrictions on the relative positions of substituents '
+    };
+    var similarityTooltipsReactions = {
+
+        "LblHelpSim1": 'Tight: Similar reactions on the basis of the atom spheres 1 to 5 of the starting material/product relationship(s).',
+        "LblHelpSim2": 'Near: Similar reactions on the basis of the atom spheres 1 to 4 of the starting material/product relationship(s).',
+        "LblHelpSim3": 'Medium: Similar reactions on the basis of the atom spheres 1 to 3 of the starting material/product relationship(s).',
+        "LblHelpSim4": 'Wide: Similar reactions on the basis of the atom spheres 1 and 2 of the starting material/product relationship(s).',
+        "LblHelpSim5": 'Widest: Similar reactions on the basis of the direct atom sphere of the starting material/product relationship(s).'
+    };
+
+    var similarityLabels = {
+        "lblSim1":'Position/Stereo Isomers',
+        "lblSim2":'Near',
+        "lblSim3":'Medium',
+        "lblSim4":'Wide',
+        "lblSim5":'Widest'
+    };
+
+    var autolan_ena = true;
+    var syn_mode = 'simple_and_auto';
+
+    var scopusaction = '/reaxys/secured/scopus.do';
+    var pagingaction = '/reaxys/secured/paging.do';
+
+    var querypage = '/reaxys/secured/start.do';
+    var historypage = '/reaxys/secured/history.do';
+    var clipboardpage = '/reaxys/secured/clipboard.do';
+    var registr = '/reaxys/secured/registr.do?backURL=';
+    var beforeBeginTime = 0;   // in sec
+    var secunde = 0;
+    var minute = beforeBeginTime / 60;
+    var dialogInProgress = false;
+    var scopus = '/reaxys/secured/scopus.do';
+    var subDetail = '/reaxys/secured/substance_detail.do';
+    var fullTextHref = '/reaxys/secured/fulltext.do';
+    var planerjs = '/reaxys/secured/planerjs.do';
+    var output = '/reaxys/secured/output.do';
+    var register = '/reaxys/secured/registr.do';
+    var shibdata = '/reaxys/shibdata.do';
+    var availabilityservice = '/reaxys/secured/availabilityservice.do';
+    var sessiondo = '/reaxys/session.do';
+
+    var err_session_expired = "Your Reaxys session has reached a timeout and has been shut down automatically. Please note: all unsaved results of the closed session have been lost. ";
+    var err_access_denied = 'This operation cannot be performed as you have no permissions are required for it.';
+    var byePageRememberCookie = '/reaxys/logout.do';
+    
+    var byePageNoCookie = '/reaxys/logout.do';
+    
+    var urlInfo = "/info/";
+    var loadingLogin = "<img alt=\"\" height='16' src=\"../images/Oceanblue/loading.gif\"/>" + "Attempting to login...";
+
+    var isInstitutionLoginNotnamed = false;
+    var isInstitutionLogin = false; // marks user as Institution Authenticated
+    var main_db = true;
+    var templateId = 0;
+    var infoAdd = '?utm_source=' + ('Oceanblue'.indexOf('Xcelerate') > -1 ? "xcelerate" : "classic");
+    infoAdd = infoAdd + "&utm_medium=reaxys&utm_campaign=reaxysproductinternal";
+    var contextPathForCookies = "/reaxys";
+</script>
+<script type="text/javascript" language="javascript" src="/reaxys/js/session.jsp?rand=0.1342179688320756"></script>
+<script type="text/javascript">
+    dojo.declare("modifiedMenuItem", dijit.MenuItem, {
+        lastItem: null,
+        emptyImg: false,
+        hitsetName: null,
+        orderNumber: null,
+        clipboardType: null,
+        rxid: null,
+        cnr: null,
+        numberDetail: null,
+        context: null,
+        action: null,
+        factName: null,
+        firstFact: null,
+        lastFact: null,
+        hitOnly: null,
+        reactionNumber:null,
+        synthesizeId:null,
+        substSearchName:null,
+        autoplan:null,
+
+        postCreate: function() {
+            this.inherited("postCreate", arguments);
+
+            if (this.emptyImg) this.iconNode.className = "dijitMenuItemIconEmpty";
+
+            this.connect(this.domNode, "onblur", this.blur);
+        },
+        _onHover: function() {
+            // summary: callback when mouse is moved onto menu item
+            try {
+                this.getParent().onItemHover(this);
+            } catch(e) {
+            }
+        },
+        _onUnhover: function() {
+            // summary: callback when mouse is moved off of menu item
+            // if we are unhovering the currently selected item
+            // then unselect it
+            try {
+                this.getParent().onItemUnhover(this);
+            } catch(e) {
+            }
+        },
+        focus: function() {
+            dojo.addClass(this.domNode, 'dijitMenuItemHover');
+            try {
+                dijit.focus(this.focusNode);
+                if (lastItem != null && lastItem != this.domNode) dojo.removeClass(lastItem, 'dijitMenuItemHover');
+            } catch(e) {
+                // this throws on IE (at least) in some scenarios
+            }
+            lastItem = this.domNode;
+        },
+        blur: function() {
+            dojo.removeClass(this.domNode, 'dijitMenuItemHover');
+        }
+    });
+</script>
+
+
+<script type="text/javascript">
+    var tmpNavigate = '/reaxys/secured/search.do';
+    
+    tmpNavigate = '/reaxys/secured/search.do';
+    
+    
+    
+    
+    
+    
+    
+    
+    var tmpNavigateSave = tmpNavigate;
+    var blnTryLogin = false;
+    var blnEditor = false;
+    var editor = 'ChemAxon MarvinSketch';
+    
+    blnEditor = true;
+    
+    require(["dojo/domReady", "dojo/query"], function(ready, find) {
+        ready(function() {
+            find("td.cursorPointer a.actbg").on("click", function(event) {
+                event.preventDefault();
+            });
+            find("td.active a.actbg").on("click", function(event) {
+                event.preventDefault();
+            });
+        })
+    });
+</script>
+
+
+<tr>
+    <td id="Logo">
+        <table width="100%">
+            
+            <tbody><tr>
+                <td align="left" valign="bottom" style="padding-right:50px" nowrap="nowrap">
+                    
+
+
+
+
+
+
+<img src="/reaxys/images/logo/reaxys/Reaxys_logo.gif?ver=0.2.18608.1" alt="Reaxys Logo" border="0" style="cursor:pointer;" onclick="infoP('/info/', '?utm_source=classic&amp;utm_medium=reaxys&amp;utm_campaign=reaxysproductinternal')" height="48px" width="180px">
+                    <div style="font-size: 10px; visibility: hidden;" id="d1TD"><span id="d1">Reaxys will timeout in  <span id="d2">10:00</span> minutes </span></div>
+                </td>
+                <td align="right" valign="bottom">
+                    <table class="top_message_box" cellpadding="0" cellspacing="0">
+                        <tbody><tr>
+                            <td class="Message_client" id="message_client"><font color="#0b04db">Recorded Webinar:<br><a href="https://www3.gotomeeting.com/register/308960702" target="_blank" style="color:#0B04DB"><strong>Solving tough chemistry problems  Insights from an industry expert</strong></a><br>Tuesday, Sept. 16, 9:00 AM EDT</font>
+                            </td>
+                            <td class="Login_client">
+
+                                
+                                <div id="loginName">
+                                    
+                                    <b>Anonymous user</b> (128.193.164.203)
+                                    
+                                </div>
+                            </td>
+
+                            
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+        </tbody></table>
+    </td>
+</tr>
+
+<tr>
+<td id="main_navigation">
+<div>
+<div class="left">
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody><tr id="navig">
+            
+                <td class="active"><a class="actbg" href="#">Query</a></td>
+                <td class="cursorPointer results">
+                    <a class="actbg" href="#">Results</a>
+                </td>
+                
+                <td class="cursorPointer synthesis">
+                    <a class="actbg" href="#">Synthesis&nbsp;Plans</a>
+                </td>
+                
+                <td class="cursorPointer history">
+                    <a class="actbg" href="#">History</a>
+                </td>
+                
+                <td class="cursorPointer report">
+                    <a class="actbg" href="#">Report</a>
+                </td>
+                
+                
+                <td class="cursorPointer alerts">
+                    <a class="actbg" href="#">My&nbsp;Alerts</a>
+                </td>
+                
+                <td class="cursorPointer settings">
+                    <a class="actbg" href="#">My&nbsp;Settings</a>
+                </td>
+            
+            
+
+            
+
+            
+                <td class="cursorPointer help" onclick="openHelp();">
+                    <a class="actbg" href="#">Help</a>
+                </td>
+            
+
+            
+        </tr>
+    </tbody></table>
+
+</div>
+
+
+<div class="right" id="tdLogout" style="display:none">
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody><tr>
+            
+
+            
+            <td id="logout" class="cursorPointer" onclick="logOut();">
+                <a class="actbg" href="#">Logout</a>
+            </td>
+        </tr>
+    </tbody></table>
+</div>
+
+<div class="right" id="tableRegistr">
+
+    <table border="0" cellspacing="0" cellpadding="0">
+
+        <tbody><tr class="oceanblue">
+            
+            
+            
+                <td class="cursorPointer" onclick="goToRegisterPage();return false;">
+                    <a class="actbg" href="#">Register</a>
+                </td>
+            
+            
+            
+            <td class="oceanblue for_dijit_button">
+                <span class="dijit dijitReset dijitInline dijitDropDownButton" widgetid="cmdLogin"><span class="dijitReset dijitInline dijitButtonNode" data-dojo-attach-event="ondijitclick:_onClick" data-dojo-attach-point="_buttonNode"><span class="dijitReset dijitStretch dijitButtonContents dijitDownArrowButton" data-dojo-attach-point="focusNode,titleNode,_arrowWrapperNode,_popupStateNode" role="button" aria-haspopup="true" aria-labelledby="cmdLogin_label" tabindex="0" id="cmdLogin" style="-webkit-user-select: none;"><span class="dijitReset dijitInline dijitIcon dijitNoIcon" data-dojo-attach-point="iconNode"></span><span class="dijitReset dijitInline dijitButtonText" data-dojo-attach-point="containerNode" id="cmdLogin_label">Login</span><span class="dijitReset dijitInline dijitArrowButtonInner"></span><span class="dijitReset dijitInline dijitArrowButtonChar">▼</span></span></span><input type="button" value="" class="dijitOffScreen" tabindex="-1" data-dojo-attach-point="valueNode" role="presentation"></span>
+
+                
+
+            </td>
+        </tr>
+    </tbody></table>
+
+</div>
+
+
+</div>
+</td>
+</tr>
+<script type="text/javascript">
+    //for check errorI move this code 
+    var overMessage = '0Reaxys overloaded';
+    var overMessage0 = 'reached a system limit';
+    var blackListErr = 'The session has been terminated or rejected for security reasons. Please contact your local admin.';
+    var black_revalidate = "Your session changed to an IP address outside of your account's IP ranges and was closed.";
+    var black_ip_changed = 'Your session became invalid due to an IP address change.';
+    var black_external_ip_changed = 'Your external session became invalid due to an IP address change.';
+    var blacklistflag;
+</script>
+<!-- BEGIN LivePerson Button Code -->
+
+<script type="text/javascript">
+    var script = document.createElement("script");
+    script.src = "https://server.lon.liveperson.net/hc/41683706/?cmd=mTagRepstate&site=41683706&buttonID=12&divID=lpButDivID-1315928979&bt=3&c=1";
+    script.type = "text/javascript";
+    script.defer = "defer";
+    script.charset = "UTF-8";
+    document.getElementsByTagName("head")[0].appendChild(script);
+</script>
+<!-- END LivePerson Button code --><tr>
+            <td>
+                <div id="searchForm" widgetid="searchForm">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+        <tr>
+            <td valign="top">
+                <div class="topButtonBar">
+                    <div class="topButtonBarOver">
+                        <a href="#" class="startOver"></a>
+                    </div>
+                    <div class="topButtonBarLinks">
+                        <a href="#" class="export"></a>
+                        <a href="#" class="import"></a>
+                    </div>
+                </div>
+                <div class="quickSearchPanel" align="center" id="uniqName_4_6" widgetid="uniqName_4_6">
+    <table class="quickSearchPanelTable" border="0" cellpadding="0" cellspacing="0">
+        <colgroup>
+            <col style="width: 72px;">
+            <col style="width: 30px;">
+            <col>
+            <col style="width: 60px;">
+        </colgroup>
+        <tbody>
+        <tr>
+            <td>Ask&nbsp;Reaxys</td>
+            <td>
+                <div class="betaConner">&nbsp;</div>
+            </td>
+            <td class="quickSearchFieldTd">
+                <input type="text" placeholder="Enter a keyword, concept or author" data-dojo-attach-point="quickSearchField" class="quickSearchField" value="13110-37-7">
+            </td>
+            <td>
+                <input type="button" data-dojo-attach-point="quickSearchButton" class="quickSearchButton" value="Go">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+                <div class="ribbon" id="uniqName_4_0" widgetid="uniqName_4_0"><div class="ribbonButton" align="center"><div class="ribbonBorder"><img src="../images/themes/custom/ribbon/reactions_ribbon.png" alt="Reactions" class="buttonIcon"><div class="buttonName"><a href="#">Reactions</a></div></div></div><div class="ribbonButton" align="center"><div class="ribbonBorder"><img src="../images/themes/custom/ribbon/substances_ribbon.png" alt="Substances" class="buttonIcon"><div class="buttonName"><a href="#">Substances</a></div></div></div><div class="ribbonButton" align="center"><div class="ribbonBorder"><img src="../images/themes/custom/ribbon/literature_ribbon.png" alt="Literature" class="buttonIcon"><div class="buttonName"><a href="#">Literature</a></div></div></div><div class="ribbonButton" align="center"><div class="ribbonBorder"><img src="../images/themes/custom/ribbon/reaxys_tree_ribbon.png" alt="ReaxysTree" class="buttonIcon"><div class="buttonName"><a href="#">ReaxysTree</a></div></div></div><div class="groupIcons"><div></div></div><div class="ribbonButton" align="center"><div class="ribbonBorder"><img src="../images/themes/custom/ribbon/physical_ribbon.png" alt="Physical" class="buttonIcon"><div class="buttonName"><a href="#">Physical</a></div></div></div><div class="ribbonButton" align="center"><div class="ribbonBorder"><img src="../images/themes/custom/ribbon/spectra_ribbon.png" alt="Spectra" class="buttonIcon"><div class="buttonName"><a href="#">Spectra</a></div></div></div><div class="ribbonButton" align="center"><div class="ribbonBorder"><img src="../images/themes/custom/ribbon/natural_product_ribbon.png" alt="Natural Product" class="buttonIcon"><div class="buttonName"><a href="#">Natural Product</a></div></div></div><div class="groupIcons"><div></div></div><div class="ribbonButton" align="center"><div class="ribbonBorder activeIcon"><img src="../images/themes/custom/ribbon/advanced_ribbon.png" alt="Advanced" class="buttonIcon"><div class="buttonName"><a href="#">Advanced</a></div></div></div></div>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <div data-dojo-attach-point="mainMenu" style="display:none;"></div>
+                <div id="uniqName_4_1" widgetid="uniqName_4_1">
+    <form action="search.do" method="post" data-dojo-attach-point="queryForm">
+        <input type="hidden" name="currentTabId" value="RX_Advanced">
+        <input type="hidden" name="currentTab.searchContext" value="all">
+        <div class="constraintBox" id="uniqName_5_0" title="Structure" widgetid="uniqName_5_0">
+    <div class="titleBox">
+        <div class="label">Structure</div>
+        <div class="turnOff invisible"><a href="#"></a></div>
+    </div>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td class="click_draw_area">
+                <input name="structure.molecule" type="hidden" value="
+
+HDR
+ 15 15  0  0  0  0  0  0  0  0999 V2000
+    6.0630    1.4997    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.1969    1.9996    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.9292    1.9996    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.0630    0.4999    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.3307    1.4997    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    5.1969    2.9994    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    7.7953    1.4997    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.9292    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.4646    1.9996    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    7.7953    0.4999    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.5984    1.4997    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    8.6615    0.0000    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    1.7323    1.9996    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.8661    1.4997    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.0000    1.9996    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  1  0  0  0  0
+  1  3  2  0  0  0  0
+  1  4  1  0  0  0  0
+  2  5  1  0  0  0  0
+  2  6  2  0  0  0  0
+  3  7  1  0  0  0  0
+  4  8  2  0  0  0  0
+  5  9  1  0  0  0  0
+  7 10  2  0  0  0  0
+  8 10  1  0  0  0  0
+  9 11  1  0  0  0  0
+ 10 12  1  0  0  0  0
+ 11 13  1  0  0  0  0
+ 13 14  1  0  0  0  0
+ 14 15  1  0  0  0  0
+M  REG 2100632
+M  END
+">
+                <input name="structure.expanded" type="hidden" value="true">
+                <div class="_border" data-dojo-attach-point="_border" style="height: 225px;">
+                    <div class="div_safari div_applet">
+                        <div class="editor" data-dojo-attach-point="_EditorObject" title="Open structure editor" style="height: 195px;">
+                            <span class="gsfnText" style="display: none;"></span>
+                            <input type="button" class="btnActiveEdit" title="Edit Structure" alt="Edit Structure" style="">
+                            <input type="button" class="btnActiveClear" title="Clear Structure" alt="Clear Structure" style="">
+                            <div class="btnActiveEditor" title="Structure Editor" style="display: none;"></div>
+                            <div type="button" data-dojo-attach-point="_btnPaste" class="btnDisabledPaste" title="Paste from another query tab"></div>
+                            <table border="0" cellspacing="0" cellpadding="0" width="100%" data-dojo-attach-point="EditorObjectTable" style="height: 195px;">
+                                <tbody>
+                                <tr>
+                                    <td align="center" valign="top"><div id="EditorObject"><img alt="" id="molimage" src="../session_data/1B9E5FA4072AF7A68B502648535897FF/1411034160259.png?1411034160259" width="300" height="176"></div></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="structure_create_link">
+                            <a href="#">Create Structure Template from Name</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="clear_draw"></td>
+            <td class="searchAsBy">
+                <ul data-dojo-attach-point="domSearchAs" style="display: none;"></ul>
+                <div class="searchAsBreak" style="display: none;">&nbsp;</div>
+                <ul>
+                    <li>
+                        <input type="radio" name="structure.searchBy" value="exact">As drawn
+                    </li>
+                    <li>
+                        <input type="radio" name="structure.searchBy" value="">Substructure
+                        <ul>
+                            <li class="dis_label_text">
+                                <input type="radio" name="structure.allAtoms" value="sub_hetero" disabled="">on heteroatoms
+                            </li>
+                            <li class="dis_label_text">
+                                <input type="radio" name="structure.allAtoms" value="substructure" disabled="">on all atoms
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <input type="radio" name="structure.searchBy" value="similarity">Similarity
+                    </li>
+                </ul>
+            </td>
+            <td class="clear_draw"></td>
+            <td class="searchAsBy" data-dojo-attach-point="domOtherOptions">
+                <ul data-dojo-attach-point="domMainOtherOptions">
+                    <li>
+                        <input type="checkbox" name="structure.tautomers" value="true">Include tautomers
+                    </li>
+                    <li>
+                        <input type="checkbox" name="structure.ignoreStereo" value="true">Ignore stereo
+                    </li><li><input type="checkbox" name="structure.noSalts" value="true" class="onlySubstances">No salts</li><li><input type="checkbox" name="structure.noMixtures" value="true" class="onlySubstances">No mixtures</li>
+                    <li>
+                        <input type="checkbox" name="structure.noIsotopes" value="true">No isotopes
+                    </li>
+                    <li>
+                        <input type="checkbox" name="structure.noCharges" value="true">No charges
+                    </li>
+                    <li>
+                        <input type="checkbox" name="structure.noRadicals" value="true">No radicals
+                    </li>
+                    <li>
+                        <input type="checkbox" name="structure.noExtraRings" value="true">No ring closures
+                    </li><li><input type="checkbox" name="structure.ignoreAtomMapping" value="true" class="onlyReactions">Ignore atom mappings</li>
+                    <li>
+                        <input type="checkbox" name="structure.alignResults" value="true">Align results with query
+                    </li>
+                </ul>
+                <div class="moreOptionsLink" style="">
+                    <a href="#">More options</a>
+                </div>
+                <ul class="moreOptions" data-dojo-attach-point="domMoreOptions" style="display: none;"><li><input type="checkbox" name="structure.includeRelatedMarkush" value="true" class="onlySubstances">Include related Markush</li><li><input type="checkbox" name="structure.keepFragments" value="true">Keep fragments<ul><li class="dis_label_text"><input type="radio" name="structure.keepTogetherFragments" value="separate_fragments" disabled="">separate<input type="radio" name="structure.keepTogetherFragments" value="merge_fragments" disabled="">together</li></ul></li>
+                    <li class="smalllabel">(type values in fields e.g. 3-5)</li>
+                <li><input class="smalltxtfield onlySubstances" type="text" name="structure.atoms" size="4" value=""># of Atoms</li><li><input class="smalltxtfield onlySubstances" type="text" name="structure.fragments" size="4" value=""># of Fragments</li><li><input class="smalltxtfield onlySubstances" type="text" name="structure.ringClosures" size="4" value=""># of Ring Closures</li></ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="batch" data-dojo-attach-point="batch" style="display: none;"></div>
+</div>
+        <div data-dojo-attach-point="formulaForm"></div>
+        <div data-dojo-attach-point="alloyForm"></div>
+        <div id="uniqName_4_2" widgetid="uniqName_4_2"><div class="constraintBox roleForm" id="uniqName_4_3" widgetid="uniqName_4_3"><span class="roleTitle">Please&nbsp;select&nbsp;role</span><ul><li><input type="radio" name="structure.searchAs" value="product">Product</li><li><input type="radio" name="structure.searchAs" value="starting_material">Starting material</li><li><input type="radio" name="structure.searchAs" value="reagent_or_catalyst">Reagent / Catalyst</li><li><input type="radio" name="structure.searchAs" value="all_reactions">Any role</li></ul></div></div>
+        <div class="constraintBox" id="uniqName_4_4" title="Advanced" widgetid="uniqName_4_4">
+    <div class="titleBox">
+        <div class="label">Advanced</div>
+        <div class="turnOff invisible">
+            <a href="#"></a>
+        </div>
+    </div>
+    <div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="_advancedTable">
+            <colgroup>
+                <col style="width:50px;">
+                <col style="width:540px;">
+                <col style="width:100px;">
+            </colgroup>
+            <tbody><tr>
+                <td>&nbsp;</td>
+                <td>
+                    <div style="margin: 10px 0;">Construct a query by typing or use the field list.</div>
+                    <textarea cols="65" rows="4" name="advanced.value" value="" style="overflow:auto;" data-dojo-attach-point="advancedField" placeholder="Example: IDE.MW='80-100' AND IDE.NE='2' (retrieves compounds with a molecular weight (MW) between 80 and 100, where the number of elements (NE) is 2)" class="advancedField"></textarea>
+                    <a href="#" class="checkSyntaxClass disabledCheckSyntaxText">Check Syntax</a>
+                    <input type="hidden" class="hiddenExpertQuery">
+                    <input type="hidden" class="hiddenBoundOperator">
+                    <input type="hidden" name="advanced.includeChildren" value="">
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <div style="margin: 5px 0;">
+                        <a href="#" data-dojo-attach-point="showSearchableFields" class="showSearchableFields">Show
+                            Property List</a>
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr class="advancedTreeTr" style="display:none;">
+                <td>&nbsp;</td>
+                <td>
+                    <div style="margin: 5px 0;overflow:hidden;">
+                        <input class="input_search_facts findPropertyInputAdvanced" data-dojo-attach-point="findPropInput" placeholder="Find any property with a few characters... e.g., bond type">
+                        <input type="button" class="but_disabled_restoreField resetButtonAdvanced" alt="Restore Tree" disabled="disabled" data-dojo-attach-point="resetButton">
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr class="advancedTreeTr" style="height: 150px;display:none;">
+                <td valign="top">Available <br>Properties</td>
+                <td class="advancedTreeTd" valign="top" align="left">
+                    <div data-dojo-attach-point="divAdvancedTree"></div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr class="advancedTreeTr" style="display:none;">
+                <td>&nbsp;</td>
+                <td>
+                    <div style="margin: 5px 0;" data-dojo-attach-point="moreSyntaxDetails">
+                       <span class="colorDisabledTreeText">Specify complex property queries in this format:
+                           "&lt;field code&gt; &lt;operator&gt; &lt;field value(s)&gt;". Click any
+                            property in the outline to add its code to your query.</span>
+                    <a href="http://help.elsevier.com/app/reaxys_select/p/9273" target="_blank">More Syntax Details</a></div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody></table>
+    </div>
+</div>
+        <div data-dojo-attach-point="taxonomyForm"></div>
+        <div class="buttonsBarBox">
+            <div class="bottomPanel" id="uniqName_4_5" widgetid="uniqName_4_5" style="display: none;"></div>
+        </div>
+        <div class="bottomButtonBar">
+            <div class="clearQuery"><a href="#">Clear&nbsp;Query</a></div>
+        <div class="buttonsMenu searchButtonFixed" id="uniqName_3_0" widgetid="uniqName_3_0" style="left: 837px; bottom: 20px;"><input class="button" type="submit" value="Search"><span class="dijit dijitReset dijitInline dijitDropDownButton" widgetid="dijit_form_DropDownButton_0"><span class="dijitReset dijitInline dijitButtonNode" data-dojo-attach-event="ondijitclick:_onClick" data-dojo-attach-point="_buttonNode"><span class="dijitReset dijitStretch dijitButtonContents dijitLeftArrowButton" data-dojo-attach-point="focusNode,titleNode,_arrowWrapperNode,_popupStateNode" role="button" aria-haspopup="true" aria-labelledby="dijit_form_DropDownButton_0_label" tabindex="0" id="dijit_form_DropDownButton_0" style="-webkit-user-select: none;"><span class="dijitReset dijitInline dijitIcon dijitNoIcon" data-dojo-attach-point="iconNode"></span><span class="dijitReset dijitInline dijitButtonText" data-dojo-attach-point="containerNode" id="dijit_form_DropDownButton_0_label">&nbsp;</span><span class="dijitReset dijitInline dijitArrowButtonInner"></span><span class="dijitReset dijitInline dijitArrowButtonChar">▼</span></span></span><input name="buttonVal_uniqName_3_0" type="button" value="all" class="dijitOffScreen" tabindex="-1" data-dojo-attach-point="valueNode" role="presentation"></span></div></div>
+    </form>
+</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+            </td>
+        </tr>
+        <tr class="copyright_footer">
+            <td>
+                
+
+
+
+
+
+
+
+
+
+<div id="footerWrapper">
+    <div id="pageFooter">
+        <div id="footerNav">
+            <div>
+                <h2>Life Science Solutions</h2>
+                <ul>
+                    <li><a href="http://www.elsevier.com/online-tools/life-science-solutions/professional-services" target="_blank">Professional&nbsp;Services™</a></li>
+                    <li><a href="http://www.elsevier.com/online-tools/pathway-studio" target="_blank">Pathway Studio™</a></li>
+                    <li><a href="http://www.elsevier.com/online-tools/reaxys-medicinal-chemistry" target="_blank">Reaxys® Medicinal Chemistry</a></li>
+                    <li><a href="http://www.elsevier.com/online-tools/reaxys" target="_blank">Reaxys®</a></li>
+                    <li><a href="http://www.elsevier.com/online-tools/pharmapendium" target="_blank">PharmaPendium®</a></li>
+                    <li><a href="http://www.elsevier.com/online-tools/embase" target="_blank">Embase™</a></li>
+                    <li><a href="http://www.elsevier.com/online-tools/quosa" target="_blank">QUOSA™</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Support</h2>
+                <ul>
+                    <li><a href="https://www-reaxys-com.ezproxy.proxy.library.oregonstate.edu/info/support_contact" target="_blank">Customer Support</a></li>
+                    <li><a href="https://www-reaxys-com.ezproxy.proxy.library.oregonstate.edu/info/contact" target="_blank">Contact Us</a></li>
+                    <li>
+                        
+                        <a href="../tests/test.jsp" target="_blank">Performance Page</a>
+                        
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2>Product</h2>
+                <ul>
+                    
+                    <li><a href="https://www-reaxys-com.ezproxy.proxy.library.oregonstate.edu/documentation/about_query.shtml" target="_blank">About Reaxys</a></li>
+                    <li><a href="https://twitter.com/reaxys" target="_blank">
+                        Reaxys News and Events</a></li>
+                    
+                    <li><a href="http://www.elsevier.com/termsconditions" target="_blank"> Terms and Conditions</a></li>
+                    <li><a href="http://www.elsevier.com/privacypolicy" target="_blank">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="disclaimer">
+            <img alt="Elsevier logo" src="/reaxys/images/Oceanblue/logo-elsevier.png">
+            <p><strong>© 2014 Reed Elsevier Properties SA. All rights reserved. Authorized use only.</strong></p>
+            <p>Reaxys® and the Reaxys® trademark are owned and protected by Reed Elsevier Properties SA and used under license.</p>
+            <p>Cookies are set by this site. To decline them or learn more, visit our <a href="/documentation/cookie_disclosure.htm" target="_blank">Cookie Info</a> page.</p>
+        </div>
+    </div>
+</div>
+
+</td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+    
+</div>
+<script type="text/javascript">
+    dojo.addOnLoad(function() {
+        oceanblue.captcha.parse();
+        oceanblue.captcha.load();
+    });
+</script>
+</div>
+
+<div class="dijitDialog" role="dialog" aria-labelledby="dlgForgotten_title" id="dlgForgotten" widgetid="dlgForgotten" style="display: none; position: absolute;">
+	<div data-dojo-attach-point="titleBar" class="dijitDialogTitleBar" title="Reaxys: Forgotten Password?">
+		<span data-dojo-attach-point="titleNode" class="dijitDialogTitle" id="dlgForgotten_title" role="heading" level="1">Reaxys: Forgotten Password?</span>
+		<span data-dojo-attach-point="closeButtonNode" class="dijitDialogCloseIcon" data-dojo-attach-event="ondijitclick: onCancel" title="Cancel" role="button" tabindex="-1">
+			<span data-dojo-attach-point="closeText" class="closeText" title="Cancel">x</span>
+		</span>
+	</div>
+	<div data-dojo-attach-point="containerNode" class="dijitDialogPaneContent">
+                    <table cellpadding="0" cellspacing="4" border="0" id="tblForgotten" width="300px">
+                        <tbody><tr>
+                            <td width="50%"><label for="pwd">E-mail:</label></td>
+                            <td width="50%"><div class="dijit dijitReset dijitInline dijitLeft dijitTextBox" id="widget_emailNew" role="presentation" widgetid="emailNew" style="width: 120px;"><div class="dijitReset dijitInputField dijitInputContainer"><input class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode" autocomplete="off" name="emailNew" type="text" tabindex="2001" id="emailNew" value=""></div></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" colspan="2">
+                                <div>
+                                    <a title="Cancel" class="storebutton aButton" onclick="clickButtonF(false,'../session.do')" style="margin-left:10px;">Cancel</a>
+                                    <a title="Submit" class="storebutton aButton" onclick="clickButtonF(true,'../session.do')" id="submit">Submit</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <table cellpadding="0" cellspacing="4" border="0" width="300px">
+                        <tbody><tr id="trError1" style="display:none">
+                            <td colspan="2" class="error" id="tdError"></td>
+                        </tr>
+                        <tr id="trSuccess" style="display:none">
+                            <td colspan="2" class="error" id="tdSuccess"></td>
+                        </tr>
+                    </tbody></table>
+                </div>
+</div><div class="dijitDialog" role="dialog" aria-labelledby="dlgCaptcha_title" id="dlgCaptcha" widgetid="dlgCaptcha" style="display: none; width: 340px; top: 250px; position: absolute;">
+	<div data-dojo-attach-point="titleBar" class="dijitDialogTitleBar" title="Reaxys: Captcha Validation">
+		<span data-dojo-attach-point="titleNode" class="dijitDialogTitle" id="dlgCaptcha_title" role="heading" level="1">Reaxys: Captcha Validation</span>
+		<span data-dojo-attach-point="closeButtonNode" class="dijitDialogCloseIcon" data-dojo-attach-event="ondijitclick: onCancel" title="Cancel" role="button" tabindex="-1">
+			<span data-dojo-attach-point="closeText" class="closeText" title="Cancel">x</span>
+		</span>
+	</div>
+	<div data-dojo-attach-point="containerNode" class="dijitDialogPaneContent">
+        <div align="center" id="recaptcha_widget" style="" class=" recaptcha_nothad_incorrect_sol recaptcha_isnot_showing_audio">
+            <form name="CaptchaForm" id="frmCaptcha" method="post" action="/reaxys/secured/captcha.do" onsubmit="return false;"><div id="recaptcha_area">
+                    <table class="recaptchatable recaptcha_theme_red" id="recaptcha_table">
+                        <tbody>
+                        <tr>
+                            <td class="recaptcha_r1_c1" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td class="recaptcha_r2_c1"></td>
+                            <td class="recaptcha_image_cell" colspan="4">
+                                <div id="recaptcha_image" style="width: 300px; height: 57px;"><img id="recaptcha_challenge_image" alt="reCAPTCHA challenge image" height="57" width="300" src="https://www-google-com.ezproxy.proxy.library.oregonstate.edu/recaptcha/api/image?c=03AHJ_Vuuj_kzv_qXK5bJ65zU5pfgTj4q6Mf3-9xZM2wjJo_2tCtAMV18k1sfCLhHd2IWjI_gZbJotr3ELvzshakpFxCyaq-a13YOcTxqvK54ltVJkugh_GFguLwqiKER7p2LlBs7_fK0uAX7-v06oyAxmtuUPLcGpTHNQftbBAmJSxJiTIwdRTWGIKbdofahwB4-1Qs4cOSfKFMCi8yYgH7GrAX2oZkS2Iw&amp;th=,8bCczDnkHij3eLb65jU07_uSrfAAAAAmoAAAAAPYALyUqwQJIQ-3Qb5Wdj5KmPgnYMm7774JPWsXiUUJ0zgwFEEumiUy21ewRrOayqXqSfBLSmnco-Px56jfvqAR8HmOR01qKNrwIogQnd0kc209E_40KUc1UIMVB3j_ReeVYYmQPFSlj_OoE8CiCntBmZw-lEUMAJdiv6kKcCULyKPGdfD6evmBnATOvJXx-LkHSC0rTk_07D5_o2pfR75IH2ToOEl0XS5GJIf893c8rZw-jQAxRLCo9MDgVRQPBg"></div>
+                            </td>
+                            <td class="recaptcha_r2_c2"></td>
+                        </tr>
+                        <tr>
+                            <td class="recaptcha_r3_c1" rowspan="6"></td>
+                            <td class="recaptcha_r3_c2" colspan="4"></td>
+                            <td class="recaptcha_r3_c3" rowspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td height="49" class="recaptcha_r4_c1" rowspan="3">
+                                <div class="recaptcha_input_area">
+                                    <span class="recaptcha_only_if_image recaptcha_only_if_no_incorrect_sol" id="recaptcha_instructions_image">
+                                        Please, enter the words above
+                                    </span>
+                                    <br>
+                                    <span id="recaptcha_challenge_field_holder" style="display: none;"><input type="hidden" name="recaptcha_challenge_field" id="recaptcha_challenge_field" value="03AHJ_Vuuj_kzv_qXK5bJ65zU5pfgTj4q6Mf3-9xZM2wjJo_2tCtAMV18k1sfCLhHd2IWjI_gZbJotr3ELvzshakpFxCyaq-a13YOcTxqvK54ltVJkugh_GFguLwqiKER7p2LlBs7_fK0uAX7-v06oyAxmtuUPLcGpTHNQftbBAmJSxJiTIwdRTWGIKbdofahwB4-1Qs4cOSfKFMCi8yYgH7GrAX2oZkS2Iw"></span><input type="text" name="recaptcha_response_field" value="" onkeypress="oceanblue.captcha.keypressSubmit(event);" id="recaptcha_response_field" autocomplete="off"></div>
+                            </td>
+                            <td class="recaptcha_r4_c2" rowspan="4"></td>
+                            <td rowspan="3" style="background-color:#b02008;">
+                                <a id="recaptcha_reload_btn" href="#" title="Refresh" onclick="oceanblue.captcha.reload(event, true);">
+                                    <span id="recaptcha_reload"></span>
+                                </a>
+                            </td>
+                            <td class="recaptcha_r4_c4" rowspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="recaptcha_r7_c1"></td>
+                            <td class="recaptcha_r8_c1"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <input type="hidden" name="ajax" value="true"><input type="hidden" name="performed" value="true"><input type="hidden" name="queue" value="0" id="queue"></form></div>
+        <div>
+            <div class="captcha_message_div">&nbsp;</div>
+            <div style="text-align:right;float:right;">
+                <a href="#" title="Submit" class="captcha_submit_btn" onclick="oceanblue.captcha.submit();">Submit</a>
+            </div>
+        </div>
+    </div>
+</div><div class="dijitPopup" role="region" aria-label="tooltipDlg" style="display: none;"><div role="alertdialog" tabindex="-1" class="dijitTooltipDialog" id="tooltipDlg" widgetid="tooltipDlg" style="width: 360px; top: 0px;">
+	<div class="dijitTooltipContainer" role="presentation">
+		<div class="dijitTooltipContents dijitTooltipFocusNode" data-dojo-attach-point="containerNode" title="Enter Login information">
+                        <table>
+                            <tbody><tr valign="bottom">
+                                <td width="20%" nowrap="nowrap" style="padding-left:10px"><label for="user">User
+                                    name:</label>
+                                </td>
+                                <td width="25%" nowrap="nowrap"><div class="dijit dijitReset dijitInline dijitLeft dijitTextBox" id="widget_user" role="presentation" widgetid="user" style="width: 70px;"><div class="dijitReset dijitInputField dijitInputContainer"><input class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode" autocomplete="off" name="user" type="text" tabindex="1000" id="user" value=""></div></div></td>
+                                <td width="20%" nowrap="nowrap" style="padding-left:10px"><label for="pwd">Password:</label></td>
+                                <td width="25%" nowrap="nowrap"><div class="dijit dijitReset dijitInline dijitLeft dijitTextBox" id="widget_pwd" role="presentation" widgetid="pwd" style="width: 70px;"><div class="dijitReset dijitInputField dijitInputContainer"><input class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode" autocomplete="off" name="pwd" type="password" tabindex="1001" id="pwd" value=""></div></div>
+                                </td>
+                                <td width="10%">
+                                    <span class="dijit dijitReset dijitInline dijitButton" role="presentation" widgetid="goButton"><span class="dijitReset dijitInline dijitButtonNode" data-dojo-attach-event="ondijitclick:_onClick" role="presentation"><span class="dijitReset dijitStretch dijitButtonContents" data-dojo-attach-point="titleNode,focusNode" role="button" aria-labelledby="goButton_label" tabindex="1002" title="Go" id="goButton" style="-webkit-user-select: none;"><span class="dijitReset dijitInline dijitIcon dijitNoIcon" data-dojo-attach-point="iconNode"></span><span class="dijitReset dijitToggleButtonIconChar">●</span><span class="dijitReset dijitInline dijitButtonText" id="goButton_label" data-dojo-attach-point="containerNode"><span>Go</span></span></span></span><input name="submit" type="button" value="" class="dijitOffScreen" tabindex="-1" role="presentation" data-dojo-attach-point="valueNode"></span>
+                                </td>
+                            </tr>
+                            <tr valign="bottom" class="login_dlg_bottom">
+                                <td colspan="3"><div class="dijit dijitReset dijitInline dijitCheckBox" role="presentation" widgetid="remember"><input name="remember" type="checkbox" role="checkbox" aria-checked="false" class="dijitReset dijitCheckBoxInput" data-dojo-attach-point="focusNode" data-dojo-attach-event="onclick:_onClick" value="on" tabindex="1003" id="remember" style="-webkit-user-select: none;"></div>&nbsp;Remember me on this computer
+                                </td>
+                                <td colspan="2" align="right" style="cursor:pointer" onclick="dlgForgottenShow(false)"><a>Forgotten
+                                    password</a></td>
+                            </tr>
+
+                            <!--begin: To add a link for Institution Login !-->
+                            
+                            <!--end: To add a link for Institution Login !-->
+
+                        </tbody></table>
+
+                    </div>
+	</div>
+	<div class="dijitTooltipConnector" role="presentation" data-dojo-attach-point="connectorNode"></div>
+</div></div><div class="dijitDialogFixed dijitDialog dijitDialogFocused dijitFocused" role="dialog" aria-labelledby="msgBox_title" id="msgBox" widgetid="msgBox" style="position: absolute; width: 400px; opacity: 0; left: 320px; top: 299px; z-index: 950; display: none;">
+	<div data-dojo-attach-point="titleBar" class="dijitDialogTitleBar" title="Reaxys: Query Page">
+		<span data-dojo-attach-point="titleNode" class="dijitDialogTitle" id="msgBox_title" role="heading" level="1">Reaxys: Query Page</span>
+		<span data-dojo-attach-point="closeButtonNode" class="dijitDialogCloseIcon" data-dojo-attach-event="ondijitclick: onCancel" title="Cancel" role="button" tabindex="-1" style="display: none;">
+			<span data-dojo-attach-point="closeText" class="closeText" title="Cancel">x</span>
+		</span>
+	</div>
+	<div data-dojo-attach-point="containerNode" class="dijitDialogPaneContent" style="width: auto; height: auto;"><table width="100%"><tbody><tr><td align="center" id="msgBoxTd0" colspan="1"><img alt="" src="/reaxys/images/Oceanblue/loading.gif">&nbsp;Changing&nbsp;query&nbsp;theme…</td></tr><tr></tr></tbody></table></div>
+</div><div class="dijitDialogUnderlayWrapper" id="dijit_DialogUnderlay_0" widgetid="dijit_DialogUnderlay_0" style="display: none; top: 0px; left: 0px; z-index: 949;"><div class="dijitDialogUnderlay _underlay" data-dojo-attach-point="node" id="msgBox_underlay" style="width: 1042px; height: 667px;"></div></div><iframe src="about:blank" style="height: 0px; width: 0px; visibility: hidden; border: none;">This frame prevents back/forward cache problems in Safari.</iframe></body></html>

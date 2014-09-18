@@ -19,7 +19,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriver.Navigation;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * @author kulen
@@ -35,14 +35,17 @@ public class ReaxyCrawler {
 	public void openLoginPage() {
 		log.info("启动浏览器...");
 		System.setProperty("webdriver.firefox.bin", "/usr/bin/firefox");
-		System.setProperty("webdriver.firefox.bin", "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
-		WebDriver window = new FirefoxDriver();
-		// System.setProperty("webdriver.ie.bin", "C:\\Program Files\\Internet Explorer\\iexplore.exe");
+		// System.setProperty("webdriver.firefox.bin",
+		// "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
+		// WebDriver window = new FirefoxDriver();
+		// System.setProperty("webdriver.ie.bin",
+		// "C:\\Program Files\\Internet Explorer\\iexplore.exe");
 		// WebDriver window = new InternetExplorerDriver();
-		// System.setProperty("webdriver.chrome.bin", "/usr/bin/google-chrome");
+		System.setProperty("webdriver.chrome.bin", "/usr/bin/google-chrome");
+		System.setProperty("webdriver.chrome.driver", "/home/kulen/browser_driver/chromedriver");
 		// System.setProperty("webdriver.chrome.bin",
 		// "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
-		// WebDriver window = new ChromeDriver();
+		WebDriver window = new ChromeDriver();
 		Navigation navigation = window.navigate();
 		navigation.to("https://www-reaxys-com.ezproxy.proxy.library.oregonstate.edu");
 		window.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -65,8 +68,7 @@ public class ReaxyCrawler {
 		// log.info("返回的内容为:{}", s);
 
 		// 显示物化性质数据
-		// WebElement showDetail =
-		// window.findElement(By.linkText("Show Details"));
+		WebElement showDetail = window.findElement(By.linkText("Show Details"));
 		// showDetail.click();
 
 		// 打开合成路线数据
@@ -76,13 +78,34 @@ public class ReaxyCrawler {
 		// WebElement manualSyn =
 		// window.findElement(By.id("modifiedMenuItem_0_text"));
 		// manualSyn.click();
+		log.info("Current URL:{}", window.getCurrentUrl());
+		log.info("v1:{}", window.getPageSource().indexOf("class=\"label\""));
+		List<WebElement> eles = window.findElements(By.className("label"));
+		for (WebElement ele : eles) {
+			log.info("attr1:{}", ele.getAttribute("onclick"));
+			log.info("attr2:{}", ele.getAttribute("href"));
+			ele.click();
+		}
+		log.info("找到元素的数量大小为:{}", eles.size());
 
-		WebElement compoundDetail = window.findElement(By.id("modifiedMenuItem_2_text"));
-		compoundDetail.click();
+		WebElement query = window.findElement(By.id("modifiedMenuItem_2_text"));
+		log.info("detail:{}", query.toString());
+		query.click();
+
 		WebElement html = window.findElement(By.tagName("html"));
 		log.info("value:{}", html.toString());
 		log.info("Html:{}", window.getPageSource());
 		log.info("程序搜索完成");
+	}
+
+	public void parseDetail() throws Exception {
+		String content = this.readFileAsString("/home/kulen/MyProject/browser-crawler/html_file/detail.html");
+		Document doc = Jsoup.parse(content);
+		Elements mols = doc.select("input[name=structure.molecule]");
+		for (Element mol : mols) {
+			System.out.println(mol.attr("value"));
+		}
+		System.out.println("Finish");
 	}
 
 	public void parsePage() throws Exception {
@@ -319,12 +342,31 @@ public class ReaxyCrawler {
 		return fs;
 	}
 
+	public String readFileAsString(String filePath) throws Exception {
+		FileReader fr = new FileReader(filePath);
+		BufferedReader br = new BufferedReader(fr);
+		StringBuffer sb = new StringBuffer();
+		while (true) {
+			String s = br.readLine();
+			if (s == null) {
+				break;
+			}
+			sb.append(s);
+			sb.append("\n");
+		}
+		br.close();
+		fr.close();
+		log.debug("Page Content:{}", sb.toString());
+		return sb.toString();
+	}
+
 	public static void main(String args[]) throws Exception {
 		ReaxyCrawler rc = new ReaxyCrawler();
-		rc.openLoginPage();
+		// rc.openLoginPage();
 		// rc.parsePage();
 		// rc.testRegex();
 		// rc.parseSynthesis();
+		rc.parseDetail();
 		String v = "<b>Matsunaga; Miyajima</b> <br />Molecular crystals and liquid crystals,&nbsp;<b>1984 </b>,&nbsp; vol.&nbsp;104,&nbsp; # 3-4 &nbsp;p.&nbsp;353 - 359<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <br /> &nbsp; ";
 		// System.out.println(rc.deleteInvalidString(v));
 	}

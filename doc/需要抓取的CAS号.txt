@@ -1,0 +1,18 @@
+phpmyadmin:
+http://122.225.18.14:8085/index.php
+172.16.1.100 -> dic_cas -> cas_all
+
+产品名称、类型:
+全部CAS号，在抓取其他数据时，可以附带抓取这些数据
+
+合成路线: 
+SELECT * FROM `cas_all` WHERE `in_dic` = 0;  #在字典中的，外包已经完成抓取，所以过滤掉了
+
+结构式、Smiles、Inchi:
+SELECT * FROM `cas_all` WHERE `in_dic` = 0 AND `from` = 'synthetic_routes'; 优先抓取: 不在字典，且从合成路线里提取的CAS号
+SELECT * FROM `cas_all` WHERE `in_dic` = 0 AND `from` != 'synthetic_routes'; 后续抓取: 不在字典，排除合成路线中提取的CAS号
+SELECT * FROM `cas_all` WHERE `in_dic` = 1 ; 最后抓取: 在字典中的数据，用于比对，排错
+
+产品物化性质:
+SELECT * FROM `cas_all` WHERE `in_dic` = 1;  #优先抓取在字典中的CAS号
+SELECT * FROM `cas_all` WHERE `in_dic` = 0;  #后续抓取其他所有CAS号
