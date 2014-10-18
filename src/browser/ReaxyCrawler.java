@@ -1,7 +1,9 @@
 package browser;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,114 +32,141 @@ public class ReaxyCrawler {
 
 	static final Logger log = LogManager.getLogger(ReaxyCrawler.class);
 
-	static final ObjectMapper om = new ObjectMapper();
+	ObjectMapper om = new ObjectMapper();
 
-	public void openLoginPage() {
+	WebDriver window;
+
+	Navigation navigation;
+
+	Map<String, Object> spiderData;
+
+	public static final String mainSearchUrl = "https://www-reaxys-com.ezproxy.proxy.library.oregonstate.edu/reaxys/secured/search.do";
+
+	public void openBrowser() {
 		log.info("启动浏览器...");
-		System.setProperty("webdriver.firefox.bin", "/usr/bin/firefox");
-		// System.setProperty("webdriver.firefox.bin",
-		// "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
-		// WebDriver window = new FirefoxDriver();
-		// System.setProperty("webdriver.ie.bin",
-		// "C:\\Program Files\\Internet Explorer\\iexplore.exe");
-		// WebDriver window = new InternetExplorerDriver();
 		System.setProperty("webdriver.chrome.bin", "/usr/bin/google-chrome");
 		System.setProperty("webdriver.chrome.driver", "/home/kulen/browser_driver/chromedriver");
-		// System.setProperty("webdriver.chrome.bin",
-		// "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
-		WebDriver window = new ChromeDriver();
-		Navigation navigation = window.navigate();
+		window = new ChromeDriver();
+		navigation = window.navigate();
+	}
+
+	public void loginSite(String user, String password) {
+		spiderData = new LinkedHashMap<>();
+		log.info("开始登录网站, user:{}  password:{}", user, password);
 		navigation.to("https://www-reaxys-com.ezproxy.proxy.library.oregonstate.edu");
-		window.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		window.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		WebElement nameEle = window.findElement(By.id("user"));
 		WebElement passEle = window.findElement(By.id("pass"));
-		nameEle.sendKeys("vanness");
-		passEle.sendKeys("VanNes2197");
+		nameEle.sendKeys(user);
+		passEle.sendKeys(password);
 		WebElement loginEle = window.findElement(By.xpath("//input[@type='submit']"));
 		loginEle.click();
-		log.info("Current URL:{}", window.getCurrentUrl());
-
-		// 输入搜索条件
-		WebElement searchEle = window.findElement(By.className("quickSearchField"));
-		searchEle.sendKeys("13110-37-7");
-		WebElement goEle = window.findElement(By.xpath("//input[@value='Go']"));
-		goEle.click();
-		// System.out.println(loginEle);
-		// String s = window.getPageSource();
-		// log.info("返回的内容为:{}", s);
-
-		// 显示物化性质数据
-		WebElement showDetail = window.findElement(By.linkText("Show Details"));
-		// showDetail.click();
-
-		// 打开合成路线数据
-		// WebElement synthesize =
-		// window.findElement(By.linkText("Synthesize"));
-		// synthesize.click();
-		// WebElement manualSyn =
-		// window.findElement(By.id("modifiedMenuItem_0_text"));
-		// manualSyn.click();
-		log.info("Current URL:{}", window.getCurrentUrl());
-		log.info("v1:{}", window.getPageSource().indexOf("class=\"label\""));
-		List<WebElement> eles = window.findElements(By.className("label"));
-		for (WebElement ele : eles) {
-			log.info("attr1:{}", ele.getAttribute("onclick"));
-			log.info("attr2:{}", ele.getAttribute("href"));
-			ele.click();
-		}
-		log.info("找到元素的数量大小为:{}", eles.size());
-
-		WebElement query = window.findElement(By.id("modifiedMenuItem_2_text"));
-		log.info("detail:{}", query.toString());
-		query.click();
-
-		WebElement html = window.findElement(By.tagName("html"));
-		log.info("value:{}", html.toString());
-		log.info("Html:{}", window.getPageSource());
-		log.info("程序搜索完成");
+		String currentUrl = window.getCurrentUrl();
+		log.info("网站登录完成, URL:{}", currentUrl);
+		// 登录成功URL地址
+		// https://www-reaxys-com.ezproxy.proxy.library.oregonstate.edu/reaxys/secured/search.do;jsessionid=C15C99A5092ECFA55D2D0BA21D72D454
+		// https://www-reaxys-com.ezproxy.proxy.library.oregonstate.edu/reaxys/secured/search.do;jsessionid=333DB0B6F0780E0235B1DFAAB1A0447D
+		// 登录失败URL地址
+		// https://login.ezproxy.proxy.library.oregonstate.edu/login
+		// https://login.ezproxy.proxy.library.oregonstate.edu/login
 	}
 
-	public void parseDetail() throws Exception {
-		String content = this.readFileAsString("/home/kulen/MyProject/browser-crawler/html_file/detail.html");
-		Document doc = Jsoup.parse(content);
-		Elements mols = doc.select("input[name=structure.molecule]");
-		for (Element mol : mols) {
-			System.out.println(mol.attr("value"));
-		}
-		System.out.println("Finish");
-	}
+	public void queryCas(String cas) throws Exception {
+		try {
+			log.info("开始查询Cas:{} 数据, 当前URL:{}", cas, window.getCurrentUrl());
+			WebElement textEle = window.findElement(By.className("quickSearchField"));
+			textEle.sendKeys(cas);
+			WebElement goEle = window.findElement(By.xpath("//input[@value='Go']"));
+			goEle.click();
 
-	public void parsePage() throws Exception {
-		FileReader fr = new FileReader("D:/1.html");
-		BufferedReader br = new BufferedReader(fr);
-		StringBuffer sb = new StringBuffer();
-		while (true) {
-			String s = br.readLine();
-			if (s == null) {
+			// 等待showDetail, 加载产品的物化数据
+			log.info("查找元素之前URL:{}", window.getCurrentUrl());
+			List<WebElement> showDetails = window.findElements(By.linkText("Show Details"));
+			log.info("产品搜索结果页URL:{}", window.getCurrentUrl());
+			// showDetail.click();
+
+			// 跳转到产品详情页
+			// log.info("v1:{}",
+			// window.getPageSource().indexOf("class=\"label\""));
+			List<WebElement> eles = window.findElements(By.className("label"));
+			for (WebElement ele : eles) {
+				ele.click();
 				break;
 			}
-			sb.append(s);
-			sb.append("\n");
+			log.info("找到元素的数量大小为:{}", eles.size());
+			WebElement query = window.findElement(By.id("modifiedMenuItem_2_text"));
+			log.info("detail:{}", query.toString());
+			query.click();
+			// 验证mol文件页是否已经打开
+			window.findElement(By.className("quickSearchField"));
+			log.info("产品详情页URL:{}", window.getCurrentUrl());
+			this.writeFileAsString(cas + "_detail.html", window.getPageSource());
+			this.parseDetailPageContent(window.getPageSource());
+			navigation.back();
+
+			// 打开产品的物化数据页面
+			showDetails = window.findElements(By.linkText("Show Details"));
+			showDetails.get(0).click();
+			Thread.sleep(10 * 1000l);
+			this.writeFileAsString(cas + "_physical.html", window.getPageSource());
+			this.parseMainPageConent(window.getPageSource());
+
+			// 打开合成路线页面
+			WebElement synthesize = window.findElement(By.linkText("Synthesize"));
+			synthesize.click();
+			WebElement manualSyn = window.findElement(By.id("modifiedMenuItem_0_text"));
+			manualSyn.click();
+			log.info("合成路线页URL:{}", window.getCurrentUrl());
+			// 验证合成路线页是否已经加载完成
+			window.findElement(By.id("content"));
+			Thread.sleep(18 * 1000l);
+			this.writeFileAsString(cas + "_synthesis.html", window.getPageSource());
+			this.parseSynthesisPageContent(window.getPageSource());
+			log.info("CAS号:{} 数据查询完成", cas);
+			log.info("结果:{}", om.writeValueAsString(spiderData));
+
+			// 清空搜索内容
+			// WebElement textEleClr =
+			// window.findElement(By.className("quickSearchField"));
+			// textEleClr.clear();
+		} catch (Exception e) {
+			System.out.println(">>>>:" + e.getMessage());
+			e.printStackTrace();
 		}
-		br.close();
-		fr.close();
-		log.debug("Page Content:{}", sb.toString());
+	}
 
-		Map<String, Object> dataMap = new LinkedHashMap<String, Object>();
+	public void parseDetailPageFile(String filePath) throws Exception {
+		String content = this.readFileAsString(filePath);
+		this.parseDetailPageContent(content);
+	}
 
-		Document doc = Jsoup.parse(sb.toString());
+	public void parseDetailPageContent(String content) throws Exception {
+		log.info("开始提取mol数据");
+		Document doc = Jsoup.parse(content);
+		Elements mols = doc.select("input[name=structure.molecule]");
+		if (mols.size() == 1) {
+			Element mol = mols.get(0);
+			spiderData.put("mol", mol.attr("value"));
+		}
+	}
+
+	public void parseMainPageFile(String filePath) throws Exception {
+		String content = this.readFileAsString(filePath);
+		this.parseMainPageConent(content);
+	}
+
+	public void parseMainPageConent(String content) throws Exception {
+		log.info("开始提取主页面物化数据...");
+		Document doc = Jsoup.parse(content);
 		Elements dataEles = doc.select("table[id=main_table]>tbody>tr>td");
 		Element valueEle = dataEles.get(2);
 
+		// 提取名称, CAS号等数据
 		Elements names = valueEle.select("b");
-
 		for (Element name : names) {
 			name.remove();
 		}
-		System.out.println("--------------------");
-		// System.out.println(valueEle.toString());
-		// System.out.println(valueEle.text());
 		String valueText = valueEle.text();
 		String[] vs = valueText.split(" : ");
 		if (vs.length != names.size()) {
@@ -151,19 +180,17 @@ public class ReaxyCrawler {
 				value = value.substring(2, value.length());
 			}
 			// System.out.printf("name:%s value:%s\n", name, value);
-			dataMap.put(name, value);
+			spiderData.put(name, value);
 		}
 
 		Elements mainEles = doc.select("div[class=reactions_subdetails_main_title_up]");
-		// top level data map
-		Map<String, Object> tldm = new LinkedHashMap<>();
 		for (Element mainEle : mainEles) {
-			System.out.println(">" + mainEle.text());
+			log.info("top level data>{}", mainEle.text());
 			Elements eles = mainEle.nextElementSibling().select("div[class=reactions_subdetails_title_up]");
 			// one level data map
 			Map<String, Object> oldm = new LinkedHashMap<>();
 			for (Element ele : eles) {
-				System.out.println(">>>>" + ele.text());
+				log.info("second level data>>{}", ele.text());
 				Elements _eleTemp = ele.nextElementSibling().select("table[class=reactions_subdetails]");
 				if (_eleTemp.size() == 0) {
 					continue;
@@ -216,41 +243,19 @@ public class ReaxyCrawler {
 				}
 				oldm.put(ele.text(), dataList);
 			}
-			tldm.put(mainEle.text(), oldm);
+			spiderData.put(mainEle.text(), oldm);
 		}
-		dataMap.put("detailInfo", tldm);
-		// System.out.println(dataMap);
-		System.out.println(om.writeValueAsString(dataMap));
 	}
 
-	public void testRegex() {
-		String v = "<b>Adams et al.</b> <br />Journal of the American Chemical Society,&nbsp;<b>1926 </b>,&nbsp; vol.&nbsp;48,&nbsp;p.&nbsp;1768<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <br /> &nbsp;";
-		// System.out.println(v.replaceAll("<br />\\s*[&nbsp;]{30,120}\\s*<br />\\s*[&nbsp;]{6,30}",
-		// ""));
-		v = "<br /> &nbsp;dfa abcd<br /> &nbsp;$";
-		v = "";
-		System.out.println(v.replaceAll("<br /> &nbsp;$", ""));
+	public void parseSynthesisPageFile(String filePath) throws Exception {
+		String content = this.readFileAsString(filePath);
+		this.parseSynthesisPageContent(content);
 	}
 
-	public void parseSynthesis() throws Exception {
-		FileReader fr = new FileReader("D:/2.html");
-		BufferedReader br = new BufferedReader(fr);
-		StringBuffer sb = new StringBuffer();
-		while (true) {
-			String s = br.readLine();
-			if (s == null) {
-				break;
-			}
-			sb.append(s);
-			sb.append("\n");
-		}
-		br.close();
-		fr.close();
-		log.debug("Page Content:{}", sb.toString());
-
+	public void parseSynthesisPageContent(String content) throws Exception {
+		log.info("解析合成路线数据...");
 		List<Map<String, Object>> synList = new ArrayList<>();
-
-		Document doc = Jsoup.parse(sb.toString());
+		Document doc = Jsoup.parse(content);
 		Elements trs = doc.select("table[id=main_table]>tbody>tr");
 		List<Map<String, Object>> synRouteList = null;
 		List<Map<String, Object>> synConList = null;
@@ -316,8 +321,7 @@ public class ReaxyCrawler {
 			dataMap.put("syn_con_list", synConList);
 			synList.add(dataMap);
 		}
-		String resultJson = om.writeValueAsString(synList);
-		log.info("合成路径的数据为:{}", resultJson);
+		spiderData.put("synList", synList);
 	}
 
 	public void deleteInvalidLink(Element ele) {
@@ -327,7 +331,6 @@ public class ReaxyCrawler {
 				a.remove();
 			}
 		}
-
 	}
 
 	public String deleteInvalidString(String v) {
@@ -360,14 +363,30 @@ public class ReaxyCrawler {
 		return sb.toString();
 	}
 
+	public void writeFileAsString(String name, String content) throws Exception {
+		FileWriter fr = new FileWriter("/home/kulen/MyProject/browser-crawler/html_file/" + name);
+		BufferedWriter br = new BufferedWriter(fr);
+		br.write(content);
+		br.close();
+		fr.close();
+	}
+
+	public static void main2(String args[]) throws Exception {
+		ReaxyCrawler rc = new ReaxyCrawler();
+		rc.parseMainPageFile("/home/kulen/MyProject/browser-crawler/html_file/13110-37-7_physical.html");
+		rc.parseSynthesisPageFile("/home/kulen/MyProject/browser-crawler/html_file/13110-37-7_synthesis.html");
+	}
+
 	public static void main(String args[]) throws Exception {
 		ReaxyCrawler rc = new ReaxyCrawler();
-		// rc.openLoginPage();
-		// rc.parsePage();
-		// rc.testRegex();
-		// rc.parseSynthesis();
-		rc.parseDetail();
-		String v = "<b>Matsunaga; Miyajima</b> <br />Molecular crystals and liquid crystals,&nbsp;<b>1984 </b>,&nbsp; vol.&nbsp;104,&nbsp; # 3-4 &nbsp;p.&nbsp;353 - 359<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <br /> &nbsp; ";
-		// System.out.println(rc.deleteInvalidString(v));
+		rc.openBrowser();
+		rc.loginSite("mastk", "Mustang2004");
+		String cas = "1333-86-4"; // 没有任何搜索结果
+		cas = "2052-07-5"; // 有多条正常结果
+		cas = "2104-09-8"; // 有正常的搜索结果
+		cas = "9004-65-3"; // 有结果，但是无详情页数据
+		cas = "12316-37-7"; // 没有任何搜索结果
+		cas = "128228-96-6"; // 结果正常
+		rc.queryCas(cas);
 	}
 }
