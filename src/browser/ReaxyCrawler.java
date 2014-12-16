@@ -70,6 +70,14 @@ public class ReaxyCrawler {
 		// 登录失败URL地址
 		// https://login.ezproxy.proxy.library.oregonstate.edu/login
 		// https://login.ezproxy.proxy.library.oregonstate.edu/login
+
+		window.manage().deleteAllCookies();
+		try {
+			Thread.sleep(1000 * 30);
+		} catch (Exception e) {
+
+		}
+		window.quit();
 	}
 
 	public void queryCas(String cas) throws Exception {
@@ -82,6 +90,10 @@ public class ReaxyCrawler {
 
 			// 等待showDetail, 加载产品的物化数据
 			log.info("查找元素之前URL:{}", window.getCurrentUrl());
+			Document doc = Jsoup.parse(window.getPageSource());
+			Elements eless = doc.select("div[class=dijitDialogTitleBar]");
+			log.info("查找到无信息窗口:{}", eless.size());
+
 			List<WebElement> showDetails = window.findElements(By.linkText("Show Details"));
 			log.info("产品搜索结果页URL:{}", window.getCurrentUrl());
 			// showDetail.click();
@@ -181,6 +193,22 @@ public class ReaxyCrawler {
 			}
 			// System.out.printf("name:%s value:%s\n", name, value);
 			spiderData.put(name, value);
+		}
+
+		Elements synonymsEles = doc.select("table[class=substance_details substance_details_synonyms]>tbody>tr");
+		int counter = 0;
+		for (Element tr : synonymsEles) {
+			counter++;
+			if (counter == 1) {
+				String name = tr.text();
+				if (name.toLowerCase().indexOf("chemical names and synonyms") == -1) {
+					break;
+				}
+			}
+			if (counter == 2) {
+				String value = tr.text();
+				spiderData.put("Chemical Names and Synonyms", value);
+			}
 		}
 
 		Elements mainEles = doc.select("div[class=reactions_subdetails_main_title_up]");
